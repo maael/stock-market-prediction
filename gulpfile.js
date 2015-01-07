@@ -21,7 +21,7 @@ gulp.task('test', function () {
 });
 
 gulp.task('compile-sass', function () {
-  return gulp.src(config.sassPath + '/style.scss')
+  return gulp.src(config.sassPath + '/*.scss')
   .pipe(sass({
     style: 'compressed',
     loadPath: [config.sassPath],
