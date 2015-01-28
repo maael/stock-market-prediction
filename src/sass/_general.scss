@@ -1,0 +1,94 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: $lightGrey;
+    font-family: $font;
+    font-size: 1em;
+}
+
+.main-header {
+    background-color: $green;
+    color: $textOnGreen;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 0;
+    width: 100%;
+}
+
+.main-section {
+    float: right;
+    margin: 1em auto 1em auto;
+    width: 75%;
+}
+
+.main-menu {
+    background-color: $midGreen;
+    color: $textOnGreen;
+    cursor: default;
+    float: left;
+    height: 100%;
+    width: 25%;
+
+    &>.menu {
+        float: left;
+        height: 100%;
+        width: 40%;
+
+        &>div {
+            cursor: pointer;
+            font-size: 4em;
+            padding: 0.5em 0;
+            text-align: center;
+
+            p {
+                font-size: 0.3em;
+                margin-top: 0.5em;
+            }
+        }
+
+        &>.selected {
+            background-color: $darkGreen;
+        }
+    }
+
+    &>.sub-menu {
+        background-color: $darkGreen;
+        box-sizing: border-box;
+        float: right;
+        height: 100%;
+        padding: 1em;
+        width: 60%;
+
+        .company {
+            border-top: 1px solid $midGreen;
+            cursor: pointer;
+            padding: 0.5em;
+
+            &:last-of-type {
+                border-bottom: 1px solid $midGreen;
+            }
+        }
+
+        .title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+    }
+    
+    & .addCompanyBtn {
+        background-color: $green;
+        box-sizing: border-box;
+        border-radius: 0.3em;
+        cursor: pointer;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin: 1em 0 2em 0;
+        padding: 1em;
+        text-align: center;
+        width: 100%;
+    }
+}

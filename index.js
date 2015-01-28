@@ -4,8 +4,25 @@ var express = require('express'),
 app.use(express.static(pub));
 app.set('views',__dirname + '/views');
 app.set('view engine','jade');
+
 app.get('/', function (req, res) {
   res.render('index');
+});
+
+app.get('/dashboard', function (req, res) {
+  var companies = [
+    {
+      name: 'Nomura',
+      link: '/nomura'
+    },
+    {
+      name: 'Credit Suisse',
+      link: '/creditsuisse'
+    }
+  ];
+  res.render('dashboard', {
+    companies: companies
+  });
 });
 
 var server = app.listen(3000, function () {

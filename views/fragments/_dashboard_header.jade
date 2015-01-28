@@ -1,0 +1,28 @@
+head
+  block vars
+  title Stock Market Prediction
+  link(rel="stylesheet", href="vendor/fontello/css/s-m-p.css")
+  link(rel="stylesheet", href="stylesheets/dashboard.css")
+body
+  section.main-menu
+    div.menu
+        div
+            i.icon-user 
+            p Matthew Elphick
+        div.selected
+            i.icon-chart-line 
+            p Trends
+        div
+            i.icon-newspaper 
+            p News
+    div.sub-menu
+        div.addCompanyBtn Add New Company
+        div.title Companies
+        - if(typeof(companies) !== 'undefined')
+            for company in companies
+                div.company #{company.name}
+        - else
+            div.no-company No companies followed.
+
+  section.main-section
+    block content
