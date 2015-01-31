@@ -1,6 +1,7 @@
 var express = require('express'),
     pub = __dirname + '/public',
-    app = express();
+    app = express(),
+    port = process.env.PORT || 3000;
 app.use(express.static(pub));
 app.set('views',__dirname + '/views');
 app.set('view engine','jade');
@@ -25,7 +26,7 @@ app.get('/dashboard', function (req, res) {
   });
 });
 
-var server = app.listen(3000, function () {
+var server = app.listen(port, function () {
 
   var host = server.address().address;
   var port = server.address().port;
