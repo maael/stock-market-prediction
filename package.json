@@ -29,7 +29,9 @@
     "express": "^4.10.7",
     "ft-api-client": "^2.0.4",
     "jade": "^1.8.2",
-    "moment": "^2.8.4"
+    "moment": "^2.8.4",
+    "reading-estimate": "0.0.0",
+    "word-frequency": "0.0.0"
   },
   "devDependencies": {
     "gulp": "^3.8.10",
