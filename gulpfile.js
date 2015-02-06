@@ -2,17 +2,32 @@ var gulp = require('gulp'),
     mocha = require('gulp-mocha'),
     sass = require('gulp-ruby-sass'),
     autoprefix = require('gulp-autoprefixer'),
-    notify = require('gulp-notify');
+    notify = require('gulp-notify'),
+    connect = require('gulp-connect');
 
 var config = {
-  sassPath: './src/sass',
-  cssPath: './public/stylesheets'
+  appPath: '.',
+  cssPath: './public/stylesheets',
+  sassPath: './src/sass'
 };
 
-gulp.task('default', ['test']);
+gulp.task('default', ['connect', 'watch']);
 
 gulp.task('watch', function () {
   gulp.watch(config.sassPath + '/**/*.scss', ['compile-sass']);
+  gulp.watch(config.appPath, ['serve']);
+});
+
+gulp.task('connect', function () {
+  connect.server({
+    root: config.appPath,
+    livereload: true
+  });
+});
+
+gulp.task('serve', function () {
+  gulp.src('.')
+  .pipe(connect.reload());
 });
 
 gulp.task('test', function () {
