@@ -3,7 +3,10 @@ var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
     autoprefix = require('gulp-autoprefixer'),
     notify = require('gulp-notify'),
-    connect = require('gulp-connect');
+    nodemon = require('gulp-nodemon'),
+    refresh = require('gulp-livereload'),
+    server = require('tiny-lr')(),
+    lrPort = 35729;
 
 var config = {
   appPath: '.',
@@ -11,23 +14,15 @@ var config = {
   sassPath: './src/sass'
 };
 
-gulp.task('default', ['connect', 'watch']);
-
-gulp.task('watch', function () {
-  gulp.watch(config.sassPath + '/**/*.scss', ['compile-sass']);
-  gulp.watch(config.appPath, ['serve']);
-});
-
-gulp.task('connect', function () {
-  connect.server({
-    root: config.appPath,
-    livereload: true
-  });
-});
+gulp.task('default', ['lr', 'serve']);
 
 gulp.task('serve', function () {
-  gulp.src('.')
-  .pipe(connect.reload());
+  nodemon({
+    script: 'index.js', 
+    ext: 'js html jade sass',
+    env: {'NODE_ENV': 'development'}
+  })
+  .on('change', ['compile-sass', ['refresh']]);
 });
 
 gulp.task('test', function () {
@@ -47,4 +42,15 @@ gulp.task('compile-sass', function () {
   })))
   .pipe(autoprefix('last 2 version'))
   .pipe(gulp.dest(config.cssPath));
+});
+
+gulp.task('refresh', function() {
+  return gulp.src(appPath)
+  .pipe(refresh(server));
+});
+
+gulp.task('lr', function() {
+  server.listen(lrPort, function(err) {
+    if(err) { return console.error(err); }
+  });
 });
