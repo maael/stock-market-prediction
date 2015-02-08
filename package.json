@@ -39,7 +39,6 @@
     "gulp-mocha": "^2.0.0",
     "gulp-nodemon": "^1.0.5",
     "gulp-notify": "^2.1.0",
-    "gulp-ruby-sass": "^0.7.1",
-    "tiny-lr": "^0.1.5"
+    "gulp-ruby-sass": "^0.7.1"
   }
 }

@@ -4,9 +4,7 @@ var gulp = require('gulp'),
     autoprefix = require('gulp-autoprefixer'),
     notify = require('gulp-notify'),
     nodemon = require('gulp-nodemon'),
-    refresh = require('gulp-livereload'),
-    server = require('tiny-lr')(),
-    lrPort = 35729;
+    livereload = require('gulp-livereload');
 
 var config = {
   appPath: '.',
@@ -14,15 +12,15 @@ var config = {
   sassPath: './src/sass'
 };
 
-gulp.task('default', ['lr', 'serve']);
+gulp.task('default', ['serve']);
 
 gulp.task('serve', function () {
   nodemon({
     script: 'index.js', 
-    ext: 'js html jade sass',
+    ext: 'js jade sass',
     env: {'NODE_ENV': 'development'}
   })
-  .on('change', ['compile-sass', ['refresh']]);
+  .on('change', ['watch', 'compile-sass']);
 });
 
 gulp.task('test', function () {
@@ -44,13 +42,6 @@ gulp.task('compile-sass', function () {
   .pipe(gulp.dest(config.cssPath));
 });
 
-gulp.task('refresh', function() {
-  return gulp.src(appPath)
-  .pipe(refresh(server));
-});
-
-gulp.task('lr', function() {
-  server.listen(lrPort, function(err) {
-    if(err) { return console.error(err); }
-  });
+gulp.task('watch', function() {
+  livereload.listen();
 });
