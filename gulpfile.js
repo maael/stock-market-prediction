@@ -42,6 +42,6 @@ gulp.task('compile-sass', function () {
   .pipe(gulp.dest(config.cssPath));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   livereload.listen();
 });
