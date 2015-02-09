@@ -70,13 +70,18 @@ var controllers = (function() {
       res.render('user/details');
     };
     function login(req, res) {
-      res.render('user/login');
+      res.render('user/login', {
+        message: req.notification('loginMessage');
+      });
     };
     function logout(req, res) {
-      res.render('user/logout');
+      req.logout();
+      res.redirect('/');
     };
     function register(req, res) {
-      res.render('user/register');
+      res.render('user/register', {
+        message: req.notification('loginMessage');
+      });
     };
     return {
       details: details,
