@@ -26,16 +26,16 @@ module.exports = function(app) {
     /*
     * User Routing
     */
-    app.get('/user/login', function(req, res) {
+    app.get('/login', function(req, res) {
         controllers.user().login(req, res);
     });
-    app.get('/user/logout', function(req, res) {
+    app.get('/logout', function(req, res) {
         controllers.user().logout(req, res);
     });
-    app.get('/user/register', function(req, res) {
+    app.get('/register', function(req, res) {
         controllers.user().register(req,res);
     });
-    app.register('/user/register', function(req, res) {
+    app.get('/register', function(req, res) {
 
     });
     app.get('/user', isAuthed, function(req, res) {

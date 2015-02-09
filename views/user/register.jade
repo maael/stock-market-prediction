@@ -1,3 +1,14 @@
 extend ../fragments/_header
 append content
-    p User
+    div.loginArea
+        form
+            h2 Register
+            label Email
+                input(type='text')
+            label Password
+                input(type='password')
+            label Password Confirmation
+                input(type='password')
+            button(type='submit') Register
+        p Already have an account?
+            a(href='/login') Login

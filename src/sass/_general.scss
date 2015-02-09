@@ -92,3 +92,43 @@ body {
         width: 100%;
     }
 }
+
+.loginArea {
+    margin: 0 auto;
+    width: 80%;
+
+    h2 {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    label {
+        display: block;
+        margin: 1em 0;
+
+        input {
+            display: block;
+            margin: 0.1em 0;
+        }
+    }
+
+    button {
+        background-color: $green;
+        border: none;
+        border-radius: 0.3em;
+        color: $textOnGreen;
+        cursor: pointer;
+        display: block;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 1em 0 2em 0;
+        padding: 1em;
+        padding: 1em;
+    }
+
+    a {
+        color: $green;
+        margin-left: 0.5em;
+        text-decoration: none;
+    }
+}

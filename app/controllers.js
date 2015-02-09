@@ -60,6 +60,7 @@ var controllers = (function() {
   * Authentication Controllers
   */
   function auth() {
+
   };
 
   /*
@@ -71,7 +72,7 @@ var controllers = (function() {
     };
     function login(req, res) {
       res.render('user/login', {
-        message: req.notification('loginMessage');
+        //message: req.flash('loginMessage')
       });
     };
     function logout(req, res) {
@@ -80,7 +81,7 @@ var controllers = (function() {
     };
     function register(req, res) {
       res.render('user/register', {
-        message: req.notification('loginMessage');
+        //message: req.flash('loginMessage')
       });
     };
     return {
