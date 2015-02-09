@@ -17,10 +17,11 @@ gulp.task('default', ['serve']);
 gulp.task('serve', function () {
   nodemon({
     script: 'index.js', 
-    ext: 'js jade sass',
+    ext: 'js jade scss',
     env: {'NODE_ENV': 'development'}
   })
-  .on('change', ['watch', 'compile-sass']);
+  .on('start', ['watch'])
+  .on('change', ['watch']);
 });
 
 gulp.task('test', function () {
@@ -44,4 +45,5 @@ gulp.task('compile-sass', function () {
 
 gulp.task('watch', function () {
   livereload.listen();
+  gulp.watch(config.sassPath + '/**/*.scss', ['compile-sass']);
 });

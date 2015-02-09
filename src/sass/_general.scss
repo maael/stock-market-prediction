@@ -25,12 +25,12 @@ body {
 }
 
 .main-menu {
-    background-color: $midGreen;
+    background-color: $green;
     color: $textOnGreen;
     cursor: default;
     float: left;
     height: 100%;
-    width: 25%;
+    width: 20%;
 
     &>.menu {
         float: left;
@@ -39,7 +39,7 @@ body {
 
         &>div {
             cursor: pointer;
-            font-size: 4em;
+            font-size: 3em;
             padding: 0.5em 0;
             text-align: center;
 
@@ -63,12 +63,12 @@ body {
         width: 60%;
 
         .company {
-            border-top: 1px solid $midGreen;
+            border-top: 1px solid $green;
             cursor: pointer;
             padding: 0.5em;
 
             &:last-of-type {
-                border-bottom: 1px solid $midGreen;
+                border-bottom: 1px solid $green;
             }
         }
 

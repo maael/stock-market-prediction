@@ -29,6 +29,7 @@
     "ft-api-client": "^2.0.4",
     "jade": "^1.8.2",
     "moment": "^2.8.4",
+    "mongoose": "^3.8.23",
     "reading-estimate": "0.0.0",
     "word-frequency": "0.0.0"
   },
