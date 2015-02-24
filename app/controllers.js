@@ -68,21 +68,19 @@ var controllers = (function() {
   */
   function user() {
     function details(req, res) {
-      res.render('user/details');
+      res.render('user/details', {
+        user: req.user
+      });
     };
     function login(req, res) {
-      res.render('user/login', {
-        //message: req.flash('loginMessage')
-      });
+      res.render('user/login');
     };
     function logout(req, res) {
       req.logout();
       res.redirect('/');
     };
-    function register(req, res) {
-      res.render('user/register', {
-        //message: req.flash('loginMessage')
-      });
+    function register(req, res) {      
+      res.render('user/register');
     };
     return {
       details: details,

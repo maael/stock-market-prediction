@@ -13,7 +13,10 @@ var express = require('express'),
     passport = require('passport');
 
 /* Configure db */
-//mongoose.connect(dbConfig.url);
+mongoose.connect(dbConfig.url);
+
+/* Configure passport */
+require('./config/passport')(passport);
 
 /* Configure app */
 app.use(express.static(pub));
@@ -27,7 +30,10 @@ app.use(session({ resave: false, saveUninitialized: false, secret: 'stockmarketp
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
+app.use(function(req, res, next) {
+  res.locals.message = req.flash();
+  next();
+});
 /* Perform app routings */
 routes(app, passport);
 

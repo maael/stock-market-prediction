@@ -1,12 +1,14 @@
 extend ../fragments/_header
 append content
     div.loginArea
-        form
+        - for(var prop in message)
+            div #{message[prop]}
+        form(action='/login', method='post')
             h2 Login
             label Email
-                input(type='text')
+                input(type='text', name='email')
             label Password
-                input(type='password')
+                input(type='password', name='password')
             button(type='submit') Login
         p Need an account?
             a(href='/register') Register

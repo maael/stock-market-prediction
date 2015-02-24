@@ -29,15 +29,22 @@ module.exports = function(app, passport) {
     app.get('/login', function(req, res) {
         controllers.user().login(req, res);
     });
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/user',
+        failureRedirect: '/login',
+        failureFlash: true
+    }))
     app.get('/logout', function(req, res) {
         controllers.user().logout(req, res);
     });
     app.get('/register', function(req, res) {
         controllers.user().register(req,res);
     });
-    app.post('/register', function(req, res) {
-
-    });
+    app.post('/register', passport.authenticate('local-register', {
+        successRedirect: '/user',
+        failureRedirect: '/register',
+        failureFlash: 'This email is unavailable.'
+    }));
     app.get('/user', isAuthed, function(req, res) {
         controllers.user().details(req, res);
     });
