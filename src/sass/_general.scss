@@ -123,12 +123,21 @@ body {
         font-weight: bold;
         margin: 1em 0 2em 0;
         padding: 1em;
-        padding: 1em;
     }
 
     a {
         color: $green;
         margin-left: 0.5em;
         text-decoration: none;
+    }
+    .loginOptions {
+        li {
+            margin: 1em 0;
+        }
+        .facebookButton {
+            background-color: $facebookBlue;
+            color: #FFFFFF;
+            padding: 0.5em 0.75em;
+        }
     }
 }
