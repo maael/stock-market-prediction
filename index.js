@@ -3,15 +3,33 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     routes = require('./app/routes'),
-    db = require('./config/db');
+    dbConfig = require('./config/db'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    session = require('express-session'),
+    flash = require('connect-flash'),
+    mongoose = require('mongoose'),
+    morgan = require('morgan'),
+    passport = require('passport');
+
+/* Configure db */
+//mongoose.connect(dbConfig.url);
 
 /* Configure app */
 app.use(express.static(pub));
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('views',__dirname + '/views');
 app.set('view engine','jade');
 
+app.use(session({ resave: false, saveUninitialized: false, secret: 'stockmarketprediction'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 /* Perform app routings */
-routes(app);
+routes(app, passport);
 
 /* Initialise app */
 var server = app.listen(port, function () {

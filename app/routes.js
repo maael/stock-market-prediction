@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, passport) {
     var controllers = require('./controllers');
 
     /*
@@ -35,7 +35,7 @@ module.exports = function(app) {
     app.get('/register', function(req, res) {
         controllers.user().register(req,res);
     });
-    app.get('/register', function(req, res) {
+    app.post('/register', function(req, res) {
 
     });
     app.get('/user', isAuthed, function(req, res) {
