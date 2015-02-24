@@ -39,6 +39,21 @@ module.exports = function(app, passport) {
         successRedirect: '/user',
         failureRedirect: '/login'
     }));
+    app.get('/auth/twitter', passport.authenticate('twitter'));
+    app.get('/auth/twitter/callback', passport.authenticate('twitter', {
+        successRedirect: '/user',
+        failureRedirect: '/login'
+    }));
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get('/auth/google/callback', passport.authenticate('google', {
+        successRedirect: '/user',
+        failureRedirect: '/login'
+    }));
+    app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE'  }));
+    app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
+        successRedirect: '/user',
+        failureRedirect: '/login'
+    }));
     app.get('/logout', function(req, res) {
         controllers.user().logout(req, res);
     });

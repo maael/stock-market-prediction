@@ -132,12 +132,23 @@ body {
     }
     .loginOptions {
         li {
-            margin: 1em 0;
+            margin: 1.25em 0;
         }
-        .facebookButton {
-            background-color: $facebookBlue;
+        a {
             color: #FFFFFF;
             padding: 0.5em 0.75em;
+        }
+        .facebookButton {
+            background-color: $facebookBg;
+        }
+        .twitterButton {
+            background-color: $twitterBg;
+        }
+        .googleButton {
+            background-color: $googleBg;
+        }
+        .linkedInButton {
+            background-color: $linkedInBg;
         }
     }
 }

@@ -1,3 +1,10 @@
 extend ../fragments/_header
 append content
-    p #{user.local.email}
+    if user.local.email
+        p #{user.local.email}
+    else if user.facebook.email
+        p #{user.facebook.email}
+    else if user.twitter.username
+        p #{user.twitter.username}
+    else if user.google.email
+        p #{user.google.email}

@@ -68,6 +68,7 @@ var controllers = (function() {
   */
   function user() {
     function details(req, res) {
+      console.log(req.user);
       res.render('user/details', {
         user: req.user
       });
