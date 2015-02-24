@@ -49,7 +49,7 @@ module.exports = function(app, passport) {
         successRedirect: '/user',
         failureRedirect: '/login'
     }));
-    app.get('/auth/linkedin', passport.authenticate('linkedin', { state: 'SOME STATE'  }));
+    app.get('/auth/linkedin', passport.authenticate('linkedin'));
     app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
         successRedirect: '/user',
         failureRedirect: '/login'

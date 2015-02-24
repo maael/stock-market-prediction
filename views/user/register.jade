@@ -3,14 +3,30 @@ append content
     div.loginArea
         - for(var prop in message)
             div #{message[prop]}
-        form(action='/register', method='post')
-            h2 Register
-            label Email
-                input(type='text', name='email')
-            label Password
-                input(type='password', name='password')
-            label Password Confirmation
-                input(type='password', name='passwordConfirm')
-            button(type='submit') Register
-        p Already have an account?
-            a(href='/login') Login
+        div.leftSide
+            form(action='/register', method='post')
+                h2 Register
+                label Email
+                    input(type='text', name='email')
+                label Password
+                    input(type='password', name='password')
+                label Password Confirmation
+                    input(type='password', name='passwordConfirm')
+                button(type='submit') Register
+            p Already have an account?
+                a(href='/login') Login
+        div.rightSide
+            p Want to register with something else?
+                ul.loginOptions
+                    li 
+                        a.socialButton.facebookButton(href='/auth/facebook') 
+                            i.icon-facebook Facebook
+                    li 
+                        a.socialButton.twitterButton(href='/auth/twitter') 
+                            i.icon-twitter Twitter
+                    li 
+                        a.socialButton.googleButton(href='/auth/google') 
+                            i.icon-gplus Google+
+                    li 
+                        a.socialButton.linkedInButton(href='/auth/linkedIn') 
+                            i.icon-linkedin LinkedIn

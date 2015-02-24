@@ -19,7 +19,6 @@ body {
 }
 
 .main-section {
-    float: right;
     margin: 1em auto 1em auto;
     width: 75%;
 }
@@ -95,7 +94,7 @@ body {
 
 .loginArea {
     margin: 0 auto;
-    width: 80%;
+    width: 50%;
 
     h2 {
         font-size: 2em;
@@ -130,25 +129,40 @@ body {
         margin-left: 0.5em;
         text-decoration: none;
     }
-    .loginOptions {
-        li {
-            margin: 1.25em 0;
-        }
-        a {
-            color: #FFFFFF;
-            padding: 0.5em 0.75em;
-        }
-        .facebookButton {
-            background-color: $facebookBg;
-        }
-        .twitterButton {
-            background-color: $twitterBg;
-        }
-        .googleButton {
-            background-color: $googleBg;
-        }
-        .linkedInButton {
-            background-color: $linkedInBg;
-        }
+
+    .leftSide {
+        float: left;
+    }
+
+    .rightSide {
+        float: right;
+        text-align: center;
+    }
+}
+
+.socialButton {
+    display: block;
+    line-height: 1.5em;
+    padding: 0.5em 0.75em;
+    margin: 0.5em;
+    text-align: center;
+    text-decoration: none;
+    width: 7em;
+
+    &.facebookButton {
+        background-color: $facebookBg;
+        color: #FFFFFF;
+    }
+    &.twitterButton {
+        background-color: $twitterBg;
+        color: #FFFFFF;
+    }
+    &.googleButton {
+        background-color: $googleBg;
+        color: #FFFFFF;
+    }
+    &.linkedInButton {
+        background-color: $linkedInBg;
+        color: #FFFFFF;
     }
 }

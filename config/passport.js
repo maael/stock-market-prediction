@@ -21,11 +21,26 @@ module.exports = function(passport) {
 	  	clientSecret: configAuth.linkedInAuth.clientSecret,
 	  	callbackURL: configAuth.linkedInAuth.callbackURL,
 	  	scope: ['r_emailaddress', 'r_basicprofile'],
-    	passReqToCallback: true
+    	state: true
 	}, 
 	function(accessToken, refreshToken, profile, done) {
 	  	process.nextTick(function () {
-			console.log(profile);
+			User.findOne({ 'linkedin.id': profile.id }, function(err, user) {
+				if(err) return done(err);
+				if(user) {
+					return done(null, user);
+				} else {
+					var newUser = new User();
+					newUser.linkedin.id = profile.id;
+                    newUser.linkedin.token = accessToken;
+                    newUser.linkedin.name  = profile.displayName;
+                    newUser.linkedin.email = profile.emails[0].value;
+                    newUser.save(function(err) {
+                    	if(err) throw err;
+                    	return done(null, newUser);
+                    });
+				}
+			});
 	  	});
 	}));
 
@@ -140,7 +155,6 @@ module.exports = function(passport) {
 		User.findOne({ 'local.email': email }, function(err, user) {
 			if(err) return done(err);
 			if(!user || !user.validPassword(password)) return done(null, false, req.flash('loginMessage', 'Could not log you in.'));
-			console.log(user);
 			return done(null, user);
 		});
 	}));

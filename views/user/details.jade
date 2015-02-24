@@ -1,10 +1,33 @@
 extend ../fragments/_header
 append content
+    h4 Accounts
     if user.local.email
         p #{user.local.email}
-    else if user.facebook.email
-        p #{user.facebook.email}
-    else if user.twitter.username
-        p #{user.twitter.username}
-    else if user.google.email
-        p #{user.google.email}
+    if user.facebook.email
+        p 
+            i.icon-facebook
+            | #{user.facebook.email}
+    else 
+        a.socialButton.facebookButton(href='/connect/facebook') 
+            i.icon-facebook Facebook
+    if user.twitter.username
+        p 
+            i.icon-twitter
+            | #{user.twitter.username}
+    else
+        a.socialButton.twitterButton(href='/connect/twitter') 
+            i.icon-twitter Twitter
+    if user.google.email
+        p 
+            i.icon-google
+            | #{user.google.email}
+    else
+        a.socialButton.googleButton(href='/connect/google') 
+            i.icon-google Google
+    if user.linkedin.email
+        p 
+            i.icon-linkedin
+            | #{user.linkedin.email}
+    else
+        a.socialButton.linkedInButton(href='/connect/linkedin') 
+            i.icon-linkedin LinkedIn

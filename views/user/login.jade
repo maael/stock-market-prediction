@@ -3,26 +3,32 @@ append content
     div.loginArea
         - for(var prop in message)
             div #{message[prop]}
-        form(action='/login', method='post')
-            h2 Login
-            label Email
-                input(type='text', name='email')
-            label Password
-                input(type='password', name='password')
-            button(type='submit') Login
-        p Need an account?
-            a(href='/register') Register
-        p Want to login with something else?
-            ul.loginOptions
-                li 
-                    a.facebookButton(href='/auth/facebook') 
-                        i.icon-facebook Facebook
-                li 
-                    a.twitterButton(href='/auth/twitter') 
-                        i.icon-twitter Twitter
-                li 
-                    a.googleButton(href='/auth/google') 
-                        i.icon-gplus Google+
-                li 
-                    a.linkedInButton(href='/auth/linkedIn') 
-                        i.icon-linkedin LinkedIn
+        div.leftSide
+            form(action='/login', method='post')
+                h2 Login
+                label Email
+                    input(type='text', name='email')
+                label Password
+                    input(type='password', name='password')
+                button(type='submit') Login
+            p Need an account?
+                a(href='/register') Register
+        div.rightSide
+            p Want to login with something else?
+                ul.loginOptions
+                    li 
+                        a.socialButton.facebookButton(href='/auth/facebook') 
+                            i.icon-facebook 
+                            | Facebook
+                    li 
+                        a.socialButton.twitterButton(href='/auth/twitter') 
+                            i.icon-twitter 
+                            | Twitter
+                    li 
+                        a.socialButton.googleButton(href='/auth/google') 
+                            i.icon-gplus 
+                            | Google+
+                    li 
+                        a.socialButton.linkedInButton(href='/auth/linkedIn') 
+                            i.icon-linkedin 
+                            | LinkedIn
