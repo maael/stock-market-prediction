@@ -9,7 +9,16 @@ body
     div.menu
         div
             i.icon-user 
-            p Matthew Elphick
+            if user.facebook.name
+              p #{user.facebook.name}
+            else if user.twitter.email
+              p #{user.twitter.displayName}
+            else if user.google.name
+              p #{user.google.name}
+            else if user.linkedin.name
+              p #{user.linkedin.name}
+            else if user.local.email
+              p #{user.local.email}
         div.selected
             i.icon-chart-line 
             p Trends

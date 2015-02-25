@@ -26,6 +26,56 @@ module.exports = function(app, passport) {
     /*
     * User Routing
     */
+    /* Unlinking Routes */
+    app.get('/unlink/local', function(req, res) {
+        controllers.unlink().local(req, res);
+    });
+    app.get('/unlink/facebook', function(req, res) {
+        controllers.unlink().facebook(req, res);
+    });
+    app.get('/unlink/twitter', function(req, res) {
+        controllers.unlink().twitter(req, res);
+    });
+    app.get('/unlink/google', function(req, res) {
+        controllers.unlink().google(req, res);
+    });
+    app.get('/unlink/linkedin', function(req, res) {
+        controllers.unlink().linkedin(req, res);
+    });
+    /* Authorisation Routes */
+    app.get('/connect/local', function(req, res) {
+        controllers.user().connect(req, res);
+    });
+    app.post('/connect/local', passport.authenticate('local-register', {
+        successRedirect: '/user',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+    app.get('/connect/facebook', passport.authorize('facebook', { scope: 'email' }));
+    app.get('/connect/facebook/callback', passport.authorize('facebook', {
+        successRedirect: '/user',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+    app.get('/connect/twitter', passport.authorize('twitter', { scope: 'email' }));
+    app.get('/connect/twitter/callback', passport.authorize('twitter', {
+        successRedirect: '/user',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+    app.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }));
+    app.get('/connect/google/callback', passport.authorize('google', {
+        successRedirect: '/user',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+    app.get('/connect/linkedin', passport.authorize('linkedin'));
+    app.get('/connect/linkedin/callback', passport.authorize('linkedin', {
+        successRedirect: '/user',
+        failureRedirect: '/login',
+        failureFlash: true
+    }));
+    /* Authentication Routes */
     app.get('/login', function(req, res) {
         controllers.user().login(req, res);
     });

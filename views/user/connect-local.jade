@@ -1,0 +1,15 @@
+extend ../fragments/_header
+append content
+    div.loginArea
+        - for(var prop in message)
+            div #{message[prop]}
+        div.leftSide
+            form(action='/connect/local', method='post')
+                h2 Add Local Account
+                label Email
+                    input(type='text', name='email')
+                label Password
+                    input(type='password', name='password')
+                button(type='submit') Login
+            p
+                a(href='/user') Go back to account

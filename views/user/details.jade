@@ -2,32 +2,89 @@ extend ../fragments/_auth_header
 append content
     h4 Accounts
     if user.local.email
-        p #{user.local.email}
-    if user.facebook.email
-        p 
-            i.icon-facebook.colour-facebook
-            | #{user.facebook.email}
+        div.extendedButton
+            a.socialButton.localButton 
+                i.icon-user 
+                | Local
+            div.buttonExtension
+                | #{user.local.email}
+    else
+        a(href='/connect/local') 
+            div.extendedButton
+                div.socialButton.localButton 
+                    i.icon-user 
+                    | Local
+                div.buttonExtension
+                    i.icon-plus
+
+    if user.facebook.token
+        div.extendedButton
+            a.socialButton.facebookButton 
+                i.icon-facebook 
+                | Facebook
+            div.buttonExtension
+                | #{user.facebook.email}
+                a(href='/unlink/facebook')
+                    i.icon-cancel
     else 
-        a.socialButton.facebookButton(href='/connect/facebook') 
-            i.icon-facebook Facebook
-    if user.twitter.username
-        p 
-            i.icon-twitter.colour-twitter
-            | #{user.twitter.username}
+        a(href='/connect/facebook') 
+            div.extendedButton
+                div.socialButton.facebookButton
+                    i.icon-facebook 
+                    | Facebook
+                div.buttonExtension
+                    i.icon-plus
+
+    if user.twitter.token
+        div.extendedButton
+            a.socialButton.twitterButton 
+                i.icon-twitter  
+                | Twitter
+            div.buttonExtension
+                | #{user.twitter.username}
+                a(href='/unlink/twitter')
+                    i.icon-cancel
     else
-        a.socialButton.twitterButton(href='/connect/twitter') 
-            i.icon-twitter Twitter
-    if user.google.email
-        p 
-            i.icon-google.colour-google
-            | #{user.google.email}
+        a(href='/connect/twitter') 
+            div.extendedButton
+                div.socialButton.twitterButton
+                    i.icon-twitter  
+                    | Twitter
+                div.buttonExtension
+                    i.icon-plus
+
+    if user.google.token
+        div.extendedButton
+            a.socialButton.googleButton
+                i.icon-google  
+                | Google
+            div.buttonExtension
+                | #{user.google.email}
+                a(href='/unlink/google')
+                    i.icon-cancel
     else
-        a.socialButton.googleButton(href='/connect/google') 
-            i.icon-google Google
-    if user.linkedin.email
-        p 
-            i.icon-linkedin.colour-linkedin
-            | #{user.linkedin.email}
+        a(href='/connect/google') 
+            div.extendedButton
+                div.socialButton.googleButton
+                    i.icon-google  
+                    | Google
+                div.buttonExtension
+                    i.icon-plus
+
+    if user.linkedin.token
+        div.extendedButton
+            a.socialButton.linkedInButton 
+                i.icon-linkedin
+                | LinkedIn
+            div.buttonExtension
+                | #{user.linkedin.email}
+                a(href='/unlink/linkedin')
+                    i.icon-cancel
     else
-        a.socialButton.linkedInButton(href='/connect/linkedin') 
-            i.icon-linkedin LinkedIn
+        a(href='/connect/linkedin') 
+            div.extendedButton
+                div.socialButton.linkedInButton
+                    i.icon-linkedin  
+                    | LinkedIn
+                div.buttonExtension
+                    i.icon-plus

@@ -57,18 +57,62 @@ var controllers = (function() {
     };
 
   /*
-  * Authentication Controllers
+  * Unlinking Authentication Controllers
   */
-  function auth() {
-
+  function unlink() {
+    function local(req, res) {
+      var user = req.user;
+      user.local.email = undefined;
+      user.local.password = undefined;
+      user.save(function(err) {
+        res.redirect('/user');
+      });      
+    }
+    function facebook(req, res) {
+      var user = req.user;
+      user.facebook.token = undefined;
+      user.save(function(err) {
+        res.redirect('/user');
+      });  
+    }
+    function twitter(req, res) {
+      var user = req.user;
+      user.twitter.token = undefined;
+      user.save(function(err) {
+        res.redirect('/user');
+      });  
+    }
+    function google(req, res) {
+      var user = req.user;
+      user.google.token = undefined;
+      user.save(function(err) {
+        res.redirect('/user');
+      });  
+    }
+    function linkedin(req, res) {
+      var user = req.user;
+      user.linkedin.token = undefined;
+      user.save(function(err) {
+        res.redirect('/user');
+      });  
+    }
+    return {
+      local: local,
+      facebook: facebook,
+      twitter: twitter,
+      google: google,
+      linkedin: linkedin
+    };
   };
 
   /*
   * User Controllers
   */
   function user() {
+    function connect(req, res) {
+      res.render('user/connect-local');
+    }
     function details(req, res) {
-      console.log(req.user);
       res.render('user/details', {
         user: req.user
       });
@@ -84,6 +128,7 @@ var controllers = (function() {
       res.render('user/register');
     };
     return {
+      connect: connect,
       details: details,
       login: login,
       logout: logout,
@@ -130,7 +175,7 @@ var controllers = (function() {
     index: index,
     dashboard: dashboard,
     companies: companies,
-    auth: auth,
+    unlink: unlink,
     user: user,
     feed: feed,
     news: news
