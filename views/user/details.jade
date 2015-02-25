@@ -1,32 +1,32 @@
-extend ../fragments/_header
+extend ../fragments/_auth_header
 append content
     h4 Accounts
     if user.local.email
         p #{user.local.email}
     if user.facebook.email
         p 
-            i.icon-facebook
+            i.icon-facebook.colour-facebook
             | #{user.facebook.email}
     else 
         a.socialButton.facebookButton(href='/connect/facebook') 
             i.icon-facebook Facebook
     if user.twitter.username
         p 
-            i.icon-twitter
+            i.icon-twitter.colour-twitter
             | #{user.twitter.username}
     else
         a.socialButton.twitterButton(href='/connect/twitter') 
             i.icon-twitter Twitter
     if user.google.email
         p 
-            i.icon-google
+            i.icon-google.colour-google
             | #{user.google.email}
     else
         a.socialButton.googleButton(href='/connect/google') 
             i.icon-google Google
     if user.linkedin.email
         p 
-            i.icon-linkedin
+            i.icon-linkedin.colour-linkedin
             | #{user.linkedin.email}
     else
         a.socialButton.linkedInButton(href='/connect/linkedin') 

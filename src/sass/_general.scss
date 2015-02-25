@@ -140,6 +140,22 @@ body {
     }
 }
 
+.colour-facebook {
+    color: $facebookBg;
+}
+
+.colour-twitter {
+    color: $twitterBg;
+}
+
+.colour-gplus {
+    color: $googleBg;
+}
+
+.colour-linkedin {
+    color: $linkedInBg;
+}
+
 .socialButton {
     display: block;
     line-height: 1.5em;
