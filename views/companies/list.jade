@@ -1,5 +1,11 @@
 extend ../fragments/_auth_header
 block vars
 append content
-    p List
-    
+    input(type='text', id='symbolsearch', class='input- ui-autocomplete-input ui-autocomplete-loading', placeholder='Find Companies' autocomplete='off')
+    span(class='help-inline hide') loading
+    h4 Companies to Add
+    div.companiesToAdd
+    h4 Companies
+    script(type='text/javascript', src='/vendor/jquery/jquery.min.js')     
+    script(type='text/javascript', src='/vendor/jquery-ui/jquery-ui.min.js')    
+    script(type='text/javascript', src='/javascripts/companies.js')

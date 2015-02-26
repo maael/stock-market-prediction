@@ -30,7 +30,9 @@ var controllers = (function() {
   */
   function companies() {
       function list(req, res) {
-        res.render('companies/list');
+        res.render('companies/list', {
+          user: req.user
+        });
       };
       function view(req, res) {
         res.render('companies/detail');
