@@ -1,16 +1,16 @@
-module.exports = function(app, passport) {
-    var controllers = require('./controllers'),
-        api = require('./api');
+var controllers = require('./controllers'),
+    api = require('./api');
 
+module.exports = function(app, passport) {
     /*
     * Define check for authentication
     */
     function isAuthed(req, res, next) {
-        if(req.isAuthenticated()) return next();
+        if(req.isAuthenticated()) { return next(); }
         res.redirect('/');
     }
     function isAuthedAPI(req, res, next) {
-        if(req.isAuthenticated()) return next();
+        if(req.isAuthenticated()) { return next(); }
     }
 
     /*
@@ -172,4 +172,4 @@ module.exports = function(app, passport) {
     app.get('/news/:company', isAuthed, function(req, res) {
         controllers.news().view(req, res);
     });
-}
+};
