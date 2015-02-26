@@ -1,11 +1,31 @@
 extend ../fragments/_auth_header
 block vars
 append content
-    input(type='text', id='symbolsearch', class='input- ui-autocomplete-input ui-autocomplete-loading', placeholder='Find Companies' autocomplete='off')
-    span(class='help-inline hide') loading
-    h4 Companies to Add
-    div.companiesToAdd
-    h4 Companies
+    div.addCompany
+        input(type='text', id='symbolsearch', class='input- ui-autocomplete-input ui-autocomplete-loading', placeholder='Find Companies' autocomplete='off')
+        span(class='loading searchBullet hide') 
+            | Loading
+            i.icon-arrows-cw
+        span(class='confirmPrompt searchBullet hide')
+            | Add it?
+            i.icon-ok
+    div.companiesArea
+        h4 Companies
+        table.companies
+            thead
+                tr
+                    th Symbol
+                    th Name
+                    th Market
+                    th Status
+            tbody
+                for company in companies
+                    tr
+                        td #{company.symbol}
+                        td #{company.name}
+                        td #{company.market}
+                        td
     script(type='text/javascript', src='/vendor/jquery/jquery.min.js')     
-    script(type='text/javascript', src='/vendor/jquery-ui/jquery-ui.min.js')    
+    script(type='text/javascript', src='/vendor/jquery-ui/jquery-ui.min.js')   
+    script(type='text/javascript', src='/javascripts/api.js')  
     script(type='text/javascript', src='/javascripts/companies.js')

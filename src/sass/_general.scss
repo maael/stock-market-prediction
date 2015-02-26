@@ -1,7 +1,6 @@
 html, body {
     height: 100%;
 }
-
 body {
     background-color: $lightGrey;
     font-family: $font;
@@ -23,11 +22,9 @@ a {
 }
 
 .main-section {
-    float: left;
-    margin: 1em auto 1em auto;
-    min-height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
     position: relative;
-    width: 80%;
     h4 {
         font-size: 1.5em;
         font-weight: bold;
@@ -41,12 +38,21 @@ a {
     }
 }
 
+.main-section-with-sidebar {
+    float: right;
+    min-height: 100%;
+    width: 80%;
+}
+
 .main-menu {
     background-color: $green;
     color: $textOnGreen;
     cursor: default;
     float: left;
     height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
     width: 20%;
     & > .menu {
         float: left;
@@ -102,7 +108,8 @@ a {
 }
 
 .loginArea {
-    margin: 0 auto;
+    margin: 1em auto;
+    overflow: hidden;
     width: 50%;
     h2 {
         font-size: 2em;
@@ -110,10 +117,14 @@ a {
     }
     label {
         display: block;
+        font-weight: bold;
         margin: 1em 0;
         input {
+            border: 1px solid #CCCCCC;
             display: block;
             margin: 0.1em 0;
+            padding: 0.25em;
+            width: 100%;
         }
     }
     button {
@@ -125,7 +136,7 @@ a {
         display: block;
         font-size: 1em;
         font-weight: bold;
-        margin: 1em 0 2em 0;
+        margin: 1em auto 2em auto;
         padding: 1em;
     }
     a {
@@ -133,12 +144,19 @@ a {
         margin-left: 0.5em;
         text-decoration: none;
     }
+    p {
+        line-height: 1.25em;
+    }
     .leftSide {
         float: left;
     }
     .rightSide {
         float: right;
         text-align: center;
+    }
+    .loginOptions {
+        margin: 1em auto;
+        width: 10em;
     }
 }
 
@@ -220,7 +238,7 @@ a {
     padding: 4px 0;
     margin: 2px 0 0 0;
     list-style: none;
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     border: 1px solid #ccc;
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -246,15 +264,52 @@ a {
     }
 }
 
-#symbolsearch {
-    border: none;
-    font-size: 1.5em;
-    line-height: 2em;
-    padding: 0.5em;
+.addCompany {
+    background-color: #FFFFFF;
+    height: 4.5em;
+    position: relative;
+    #symbolsearch {
+        border: none;
+        box-sizing: border-box;
+        font-size: 1.5em;
+        left: 0;
+        line-height: 2em;
+        padding: 0.5em;
+        position: absolute;
+        top: 0;
+        text-overflow: ellipsis;
+        width: 70%;
+        &:focus {
+            outline: none;
+        }
+    }
+    .searchBullet {
+        background-color: $green;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        font-size: 1.5em;
+        line-height: 2em;
+        padding: 0.5em;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 0;
+        width: 30%;
+    }
+    .confirmPrompt {
+        cursor: pointer;
+    }
+    .hide {
+        display: none;
+    }
 }
-
-.companyToAdd {
-    &:not(:last-of-type) {
-        border-bottom: 1px solid #ccc;
+.companiesArea {
+    border-box: box-sizing;
+    margin: 1em;   
+    .companies {
+        width: 100%;
+        thead {
+            font-weight: bold;
+        }
     }
 }

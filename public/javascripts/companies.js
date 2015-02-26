@@ -1,12 +1,13 @@
 $(function() {
+    /* Autofocus relying on markitondemand api */
     $("#symbolsearch")
     .focus()
     .autocomplete({
         source: function(request,response) {
             $.ajax({
                 beforeSend: function(){ 
-                    $("span.help-inline").show();
-                    $("span.label-info").empty().hide();
+                    $('.confirmPrompt').fadeOut('fast');
+                    $('.loading').fadeIn('fast');
                 },
                 url: "http://dev.markitondemand.com/api/v2/Lookup/jsonp",
                 dataType: "jsonp",
@@ -20,16 +21,33 @@ $(function() {
                             value: item.Symbol
                         }
                     }));
-                    $("span.help-inline").hide();
+                    $('.loading').fadeOut('fast');
                 }
             });
         },
         minLength: 0,
         select: function( event, ui ) {
-            var companyString = "<div class='companyToAdd' data-symbol='" + ui.item.value + "'>" + ui.item.label + "</div>";
-            $(".companiesToAdd").append(companyString).fadeIn("fast");
-            $(this).val('');
+            $('.confirmPrompt').data('symbol', ui.item.value);
+            $('.confirmPrompt').data('label', ui.item.label);
+            $(this).val(ui.item.value + ' | ' + ui.item.label);
+            $('.confirmPrompt').fadeIn('fast');
+            $(this).blur();
             return false;
+        },
+        open: function( event, ui ) {
+            $('.confirmPrompt').fadeOut('fast');
         }
+    });
+    /* Remove companies before adding them */
+    $('body').on('click', '.confirmPrompt', function() { 
+        $("#symbolsearch").val('');
+        var symbol = $(this).data('symbol'),
+            label = $(this).data('label'),
+            name = label.split('(')[0],
+            market = label.split('(')[1];
+            market = market.substring(0, market.length - 1);
+        post('/api/user/company', {name: name, symbol: symbol, market: market});
+        $('.companies tbody').append('<tr><td>' + symbol + '</td><td>' + name + '</td><td>' + market + '</td><td></td></tr>');
+        $(this).fadeOut('fast');
     });
 });

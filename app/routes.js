@@ -1,5 +1,6 @@
 module.exports = function(app, passport) {
-    var controllers = require('./controllers');
+    var controllers = require('./controllers'),
+        api = require('./api');
 
     /*
     * Define check for authentication
@@ -7,6 +8,9 @@ module.exports = function(app, passport) {
     function isAuthed(req, res, next) {
         if(req.isAuthenticated()) return next();
         res.redirect('/');
+    }
+    function isAuthedAPI(req, res, next) {
+        if(req.isAuthenticated()) return next();
     }
 
     /*
@@ -22,7 +26,12 @@ module.exports = function(app, passport) {
     app.get('/dashboard', isAuthed, function(req, res) {
         controllers.dashboard(req, res);
     });
-    
+    /*
+    * API Routing
+    */
+    app.post('/api/user/company', isAuthedAPI, function(req, res) {
+        api.user().company().put(req, res);
+    });
     /*
     * User Routing
     */

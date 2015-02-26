@@ -1,3 +1,6 @@
+var User = require('./models/user'),
+    Company = require('./models/company'),
+    ObjectId = require('mongoose').Types.ObjectId;
 var controllers = (function() {
   /*
   * Index Controllers
@@ -30,8 +33,14 @@ var controllers = (function() {
   */
   function companies() {
       function list(req, res) {
-        res.render('companies/list', {
-          user: req.user
+        var followedCompanies = req.user.companies;
+        Company.find({ '_id' : { $in: followedCompanies }}, function(err, companies) {
+          console.log(companies);
+          if(err) { throw err; }
+          res.render('companies/list', {
+            user: req.user,
+            companies: companies
+          });
         });
       };
       function view(req, res) {
