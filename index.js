@@ -10,7 +10,8 @@ var express = require('express'),
     flash = require('connect-flash'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
-    passport = require('passport');
+    passport = require('passport'),
+    pm2 = require('pm2');
 
 /* Configure db */
 mongoose.connect(dbConfig.url);
@@ -37,6 +38,13 @@ app.use(function(req, res, next) {
 });
 /* Perform app routings */
 routes(app, passport);
+
+/* Spawn Background Processes */
+pm2.connect(function(err) {
+  pm2.start('./app/background/marketQuoter.js', { name: 'marketQuoter' }, function(err, proc) {
+    if(err) throw new Error('err');
+  });
+});
 
 /* Initialise app */
 var server = app.listen(port, function () {

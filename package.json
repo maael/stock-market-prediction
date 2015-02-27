@@ -43,7 +43,9 @@
     "passport-linkedin-oauth2": "^1.2.1",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.2",
+    "pm2": "^0.12.6",
     "reading-estimate": "0.0.0",
+    "request": "^2.53.0",
     "word-frequency": "0.0.0"
   },
   "devDependencies": {

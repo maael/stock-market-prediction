@@ -8,7 +8,7 @@ var controllers = (function() {
   */
   function index(req, res) {
     res.render('index');
-  };
+  }
 
   /*
   * Dashboard Controllers
@@ -27,7 +27,7 @@ var controllers = (function() {
     res.render('dashboard/view', {
       companies: companies
     });
-  };
+  }
 
   /*
   * Companies Controllers
@@ -48,22 +48,22 @@ var controllers = (function() {
             });
           });
         });
-      };
+      }
       function view(req, res) {
         res.render('companies/detail');
-      };
+      }
       function add(req, res) {
         res.render('companies/remove');
-      };
+      }
       function remove(req, res) {
         res.render('companies/remove');
-      };
+      }
       function addCompany(req, res) {
 
-      };
+      }
       function removeCompany(req, res) {
 
-      };
+      }
       return {
         list: list,
         view: view,
@@ -71,7 +71,7 @@ var controllers = (function() {
         addCompany: addCompany,
         removeCompany: removeCompany
       };
-    };
+    }
 
   /*
   * Unlinking Authentication Controllers
@@ -133,17 +133,17 @@ var controllers = (function() {
       res.render('user/details', {
         user: req.user
       });
-    };
+    }
     function login(req, res) {
       res.render('user/login');
-    };
+    }
     function logout(req, res) {
       req.logout();
       res.redirect('/');
-    };
+    }
     function register(req, res) {      
       res.render('user/register');
-    };
+    }
     return {
       connect: connect,
       details: details,
@@ -167,7 +167,7 @@ var controllers = (function() {
       list: list,
       view: view
     };
-  };
+  }
 
   /*
   * News Controllers
@@ -183,7 +183,22 @@ var controllers = (function() {
       list: list,
       view: view
     };
-  };
+  }
+  /*
+  * Market Controllers
+  */
+  function market() {
+    function list(req, res) {
+
+    };
+    function view(req, res) {
+
+    };
+    return {
+      list: list,
+      view: view
+    };
+  }
 
   /*
   * Expose Controllers
@@ -195,7 +210,8 @@ var controllers = (function() {
     unlink: unlink,
     user: user,
     feed: feed,
-    news: news
+    news: news,
+    market: market
   }
 })();
 
