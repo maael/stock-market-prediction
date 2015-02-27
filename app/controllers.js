@@ -1,5 +1,6 @@
 var User = require('./models/user'),
     Company = require('./models/company'),
+    Following = require('./models/following'),
     ObjectId = require('mongoose').Types.ObjectId;
 var controllers = (function() {
   /*
@@ -33,13 +34,18 @@ var controllers = (function() {
   */
   function companies() {
       function list(req, res) {
-        var followedCompanies = req.user.companies;
-        Company.find({ '_id' : { $in: followedCompanies }}, function(err, companies) {
-          console.log(companies);
-          if(err) { throw err; }
-          res.render('companies/list', {
-            user: req.user,
-            companies: companies
+        Following.find({ 'user' : req.user.id }, function(err, following) {
+          var followedCompanies = [];
+          for(var i = 0; i < following.length; i++) {
+            followedCompanies.push(following[i].company);
+          }
+          Company.find({ '_id' : { $in: followedCompanies }}, function(err, companies) {
+            console.log(companies);
+            if(err) { throw err; }
+            res.render('companies/list', {
+              user: req.user,
+              companies: companies
+            });
           });
         });
       };

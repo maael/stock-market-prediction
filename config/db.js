@@ -1,3 +1,4 @@
+var dbURL = process.env.MONGOLAB_URI || 'mongodb://localhost/stock-market-prediction';
 module.exports = {
-    url: 'mongodb://localhost/stock-market-prediction'
+    url: dbURL
 };

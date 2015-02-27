@@ -1,4 +1,5 @@
-var Company = require('./models/company');
+var Company = require('./models/company'),
+    Following = require('./models/following');
 var api = (function() {
   /*
   * User APIs
@@ -14,18 +15,20 @@ var api = (function() {
         Company.findOne({'symbol': company.symbol}, function(err, foundCompany) {
           if(err) { res.send(err); }
           if(foundCompany) {
-            var user = req.user;
-            user.companies.push(foundCompany.id);
-            user.save(function(err) {
+            var follow = new Following();
+            follow.user = req.user._id;
+            follow.company = foundCompany._id;
+            follow.save(function(err) {
               if(err) res.send(err);
               res.json({message: 'success'});
-            });        
+            });
           } else {
             company.save(function(err, saved) {
               if(err) { res.send(err); }
-              var user = req.user;
-              user.companies.push(saved.id);
-              user.save(function(err) {
+              var follow = new Following();
+              follow.user = req.user._id;
+              follow.company = saved._id;
+              follow.save(function(err) {
                 if(err) res.send(err);
                 res.json({message: 'success'});
               });
