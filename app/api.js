@@ -22,16 +22,30 @@ var api = (function() {
               if(err) res.send(err);
               res.json({message: 'success'});
             });
-          } else {
-            company.save(function(err, saved) {
-              if(err) { res.send(err); }
-              var follow = new Following();
-              follow.user = req.user._id;
-              follow.company = saved._id;
-              follow.save(function(err) {
-                if(err) res.send(err);
-                res.json({message: 'success'});
-              });
+          } else {  
+            function getQuote(company, quoteCallback) {
+                var requestURL = 'http://dev.markitondemand.com/Api/v2/Quote/json?symbol=' + company.symbol.toString();
+                request(requestURL, function(error, response, body) {
+                    if(!error && response.statusCode == 200) {
+                        var json = JSON.parse(body);
+                        if(typeof(quoteCallback) === 'function') { quoteCallback(company, json); }
+                    }
+                });
+            }
+            getQuote(company, function(company, quote) {
+              company.quotes = [];      
+              company.quotes.push(quote);
+              company.save(function(err, saved) {
+                if(err) { res.send(err); }
+                var follow = new Following();
+                follow.user = req.user._id;
+                follow.company = saved._id;
+                follow.save(function(err) {
+                  if(err) res.send(err);
+                  res.json({message: 'success'});
+                });
+                  
+              }); 
             });    
           }
         });

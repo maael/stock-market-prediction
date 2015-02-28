@@ -1,7 +1,8 @@
 var request = require('request'),
     mongoose = require('mongoose'),
     Company = require('../models/company.js'),
-    dbConfig = require('../../config/db.js'),
+    dbConfig = require('../../config/db.js');
+
 (function() {
     mongoose.connect(dbConfig.url);
     var count = 0;
@@ -9,23 +10,28 @@ var request = require('request'),
     run();
     setInterval(run, interval);
     function run() {
+        function quoteExists(quote, quotes) {
+            for(var i = 0; i < quotes.length; i++) {
+                if(JSON.stringify(quotes[i]) === JSON.stringify(quote)) { return true; }
+            }
+            return false;
+        }
         count++;
         Company.find({}, function(err, companies) {
             if(err) { throw err; }
             for(var i = 0; i < companies.length; i++) {
                 var company = companies[i];
-                if(typeof(company.quotes) !== 'undefined') {
-                    getQuote(company, function(company, quote) {
+                getQuote(company, function(company, quote) {
+                    if(!quoteExists(quote, company.quotes)) {
                         company.quotes.push(quote);
                         if(company.quotes.length > 50) {
                             company.quotes.splice(-(company.quotes.length - 50), (company.quotes.length - 50));
                         }
-                        console.log(company.quotes.length);
                         company.save(function(err, company) {
                             if(err) { throw err; }
-                        }); 
-                    });
-                }                 
+                        });
+                    }
+                });                
             }
         });
     }
