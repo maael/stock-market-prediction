@@ -4,7 +4,7 @@
   "description": "A website to provide the user with decision assistance for stock markets.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2 start process.json -l ./.log/smp.log",
     "test": "gulp test"
   },
   "repository": {

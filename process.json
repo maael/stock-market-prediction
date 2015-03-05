@@ -1,4 +1,13 @@
 [{
+    "name"        : "main website",
+    "script"      : "./index.js",
+    "instances"   : 1,
+    "log_file"    : "./.log/website.log",
+    "error_file"  : "./.log/website.log",
+    "out_file"    : "./.log/website.log",
+    "pid_file"    : "./.log/website.pid",
+    "exec_mode"   : "fork"
+}, {
     "name"        : "marketQuoter",
     "script"      : "./app/background/marketQuoter.js",
     "instances"   : 1,
