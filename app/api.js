@@ -1,5 +1,6 @@
 var Company = require('./models/company'),
-    Following = require('./models/following');
+    Following = require('./models/following'),
+    request = require('request');
 var api = (function() {
   /*
   * User APIs
