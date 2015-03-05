@@ -41,11 +41,10 @@ routes(app, passport);
 
 /* Spawn Background Processes */
 pm2.connect(function(err) {
-  pm2.start('./app/background/marketQuoter.js', { name: 'marketQuoter' }, function(err, proc) {
+  pm2._jsonStartOrAction('restart', './process.json', function(err, proc) {
       if(err) throw new Error('err');
   });
 });
-
 /* Initialise app */
 var server = app.listen(port, function () {
   var host = server.address().address,

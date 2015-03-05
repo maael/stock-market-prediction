@@ -1,0 +1,8 @@
+{
+    "name"        : "marketQuoter",
+    "script"      : "./app/background/marketQuoter.js",
+    "log_file"   : "./.log/quoter.log",
+    "error_file" : "./.log/quoter.log",
+    "out_file"   : "./.log/quoter.log",
+    "pid_file"   : "./.log/quoter.pid"
+}

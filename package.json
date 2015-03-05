@@ -4,6 +4,7 @@
   "description": "A website to provide the user with decision assistance for stock markets.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "gulp test"
   },
   "repository": {
