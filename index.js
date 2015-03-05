@@ -41,9 +41,18 @@ routes(app, passport);
 
 /* Spawn Background Processes */
 pm2.connect(function(err) {
-  pm2.start('./app/background/marketQuoter.js', { name: 'marketQuoter' }, function(err, proc) {
-    if(err) throw new Error('err');
-  });
+  pm2.start('./app/background/marketQuoter.js', 
+    { 
+      name: 'marketQuoter', 
+      log_file: './logs/quoter.log',
+      error_file: './logs/quoter.log',
+      out_file: './logs/quoter.log',
+      pid_file: './logs/quoter.log'
+    }, 
+    function(err, proc) {
+      if(err) throw new Error('err');
+    }
+  );
 });
 
 /* Initialise app */
