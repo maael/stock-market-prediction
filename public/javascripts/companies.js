@@ -50,4 +50,10 @@ $(function() {
         $('.companies tbody').append('<tr><td>' + symbol + '</td><td>' + name + '</td><td>' + market + '</td><td></td></tr>');
         $(this).fadeOut('fast');
     });
+    /* Link table rows to company pages */
+    $('body').on('click', '.company', function() {
+        if($(this).data('href') !== undefined){
+            document.location = $(this).data('href');
+        }
+    });
 });

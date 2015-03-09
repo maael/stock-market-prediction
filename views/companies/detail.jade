@@ -1,5 +1,10 @@
 extend ../fragments/_auth_header
 block vars
 append content
-    p Detail
-    
+    p #{company.symbol} | #{company.name}
+        small #{company.market}
+    div#chart
+    script(type='text/javascript', src='/vendor/d3/d3.min.js')
+    script(type='text/javascript', src='/vendor/c3/c3.min.js')
+    script(type='text/javascript', src='/javascripts/companyDetail.js')      
+   

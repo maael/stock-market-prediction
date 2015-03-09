@@ -313,3 +313,12 @@ a {
         }
     }
 }
+.company {
+    &:hover {
+        background-color: $darkGrey;
+    }
+    td {
+        cursor: pointer;
+        padding: 0.25em;
+    }
+}

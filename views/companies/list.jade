@@ -20,7 +20,7 @@ append content
                     th Status
             tbody
                 for company in companies
-                    tr
+                    tr(class='company', data-href='/companies/#{company.symbol}')
                         td #{company.symbol}
                         td #{company.name}
                         td #{company.market}

@@ -36,6 +36,7 @@ app.use(function(req, res, next) {
   res.locals.message = req.flash();
   next();
 });
+
 /* Perform app routings */
 routes(app, passport);
 

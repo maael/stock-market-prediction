@@ -40,7 +40,6 @@ var controllers = (function() {
             followedCompanies.push(following[i].company);
           }
           Company.find({ '_id' : { $in: followedCompanies }}, function(err, companies) {
-            console.log(companies);
             if(err) { throw err; }
             res.render('companies/list', {
               user: req.user,
@@ -49,8 +48,23 @@ var controllers = (function() {
           });
         });
       }
+      function get(req, res, next, symbol) {
+        Company.findOne({ 'symbol' : symbol }, function(err, company) {
+          if(err) { 
+            throw err; 
+          } else if(company) {
+            req.company = company;
+            next();
+          } else {
+            next(new Error('Failed to load company'));
+          }
+        })
+      }
       function view(req, res) {
-        res.render('companies/detail');
+        res.render('companies/detail', {
+          user: req.user,
+          company: req.company
+        });
       }
       function add(req, res) {
         res.render('companies/remove');
@@ -66,6 +80,7 @@ var controllers = (function() {
       }
       return {
         list: list,
+        get: get,
         view: view,
         remove: remove,
         addCompany: addCompany,

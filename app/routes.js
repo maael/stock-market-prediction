@@ -12,6 +12,12 @@ module.exports = function(app, passport) {
     function isAuthedAPI(req, res, next) {
         if(req.isAuthenticated()) { return next(); }
     }
+    /* Parameters */
+
+    app.param('company', function(req, res, next, symbol) {
+        controllers.companies().get(req, res, next, symbol);
+    });
+
 
     /*
     * Index Routing
