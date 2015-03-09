@@ -29,3 +29,6 @@ node_modules
 
 # Sass Cache
 .sass-cache
+
+# Data Files
+/app/data
