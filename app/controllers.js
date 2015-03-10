@@ -56,7 +56,7 @@ var controllers = (function() {
             req.company = company;
             next();
           } else {
-            next(new Error('Failed to load company'));
+            next();
           }
         })
       }

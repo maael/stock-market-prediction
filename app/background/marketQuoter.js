@@ -1,12 +1,12 @@
 var request = require('request'),
     mongoose = require('mongoose'),
-    Company = require('../models/company.js'),
-    dbConfig = require('../../config/db.js');
+    Company = require('../models/company'),
+    dbConfig = require('../../config/db');
 
 (function() {
-    mongoose.connect(dbConfig.url);
     var count = 0;
     var interval = 1800000; // 30 minutes
+    mongoose.connect(dbConfig.url);
     run();
     setInterval(run, interval);
     function run() {

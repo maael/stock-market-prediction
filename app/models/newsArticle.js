@@ -1,17 +1,18 @@
 var mongoose = require('mongoose');
 
 var newsArticleSchema = mongoose.Schema({
-	guid: String,
+	guid: {type: String, unique: true},
     title: String,
     description: String,
-    summary: String,
     date: String,
     link: String,
-    auther: String,
-    image: String,
-    source: String,
+    author: String,
     categories: [String],
-    thumbnail: String
+    feed: {
+        name: String,
+        feed: String,
+        feedType: String
+    }
 });
 
 module.exports = mongoose.model('NewsArticle', newsArticleSchema);

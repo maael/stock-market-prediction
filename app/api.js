@@ -1,7 +1,5 @@
 var http = require('http'),
     moment = require('moment'),
-    mongoose = require('mongoose'),
-    dbConfig = require('../config/db'),
     MarketData = require('./models/marketData'),
     Company = require('./models/company'),
     Following = require('./models/following'),
