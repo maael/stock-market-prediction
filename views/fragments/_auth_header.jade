@@ -5,35 +5,35 @@ head
   link(rel="stylesheet", href="/vendor/fontello/css/s-m-p.css")
   link(rel="stylesheet", href="/vendor/c3/c3.min.css")
   link(rel="stylesheet", href="/stylesheets/dashboard.css")
-body
+- var companySymbol = '';
+if(company && company.symbol)
+  - var companySymbol = company.symbol
+body(data-symbol='#{companySymbol}')
   section.main-menu
     div.menu
+        a(href='/user')
+          div
+              i.icon-user 
+              if user.facebook.name
+                p #{user.facebook.name}
+              else if user.twitter.email
+                p #{user.twitter.displayName}
+              else if user.google.name
+                p #{user.google.name}
+              else if user.linkedin.name
+                p #{user.linkedin.name}
+              else if user.local.email
+                p #{user.local.email}
         div
-            i.icon-user 
-            if user.facebook.name
-              p #{user.facebook.name}
-            else if user.twitter.email
-              p #{user.twitter.displayName}
-            else if user.google.name
-              p #{user.google.name}
-            else if user.linkedin.name
-              p #{user.linkedin.name}
-            else if user.local.email
-              p #{user.local.email}
-        div.selected
             i.icon-chart-line 
             p Trends
+        a(href='/companies')
+          div.selected
+              i.icon-briefcase
+              p Companies
         div
             i.icon-newspaper 
             p News
-    div.sub-menu
-        div.addCompanyBtn Add New Company
-        div.title Companies
-        - if(typeof(companies) !== 'undefined')
-            for company in companies
-                div.company #{company.name}
-        - else
-            div.no-company No companies followed.
 
   section.main-section.main-section-with-sidebar
     block content

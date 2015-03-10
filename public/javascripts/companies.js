@@ -47,7 +47,7 @@ $(function() {
             market = label.split('(')[1];
             market = market.substring(0, market.length - 1);
         post('/api/user/company', {name: name, symbol: symbol, market: market});
-        $('.companies tbody').append('<tr><td>' + symbol + '</td><td>' + name + '</td><td>' + market + '</td><td></td></tr>');
+        $('.companies tbody').append('<tr data-href=/companies/"' + symbol + '" class="company"><td>' + symbol + '</td><td>' + name + '</td><td>' + market + '</td><td></td></tr>');
         $(this).fadeOut('fast');
     });
     /* Link table rows to company pages */

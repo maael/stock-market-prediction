@@ -143,7 +143,18 @@ var api = (function() {
         res.json({message: 'success'});
       });
     }
+    function get(req, res) {
+      Company.find({ 'symbol' : req.query.symbol }, function(err, foundCompany) {
+        if(err) { throw err; }
+        if(foundCompany) {
+          res.json(foundCompany);
+        } else {
+          res.json({error: 'no company exists'});
+        }
+      });
+    }
     return {
+      get: get,
       put: put
     };
   };

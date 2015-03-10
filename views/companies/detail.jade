@@ -1,10 +1,14 @@
 extend ../fragments/_auth_header
 block vars
 append content
-    p #{company.symbol} | #{company.name}
+    h4 #{company.symbol} | #{company.name}
         small #{company.market}
+    h5 Market Information
+        small Currently at #{company.quotes[company.quotes.length - 1].LastPrice}
     div#chart
+    h5 News Information
     script(type='text/javascript', src='/vendor/d3/d3.min.js')
     script(type='text/javascript', src='/vendor/c3/c3.min.js')
+    script(type='text/javascript', src='/javascripts/api.js')
     script(type='text/javascript', src='/javascripts/companyDetail.js')      
    

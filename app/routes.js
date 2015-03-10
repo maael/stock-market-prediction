@@ -38,6 +38,9 @@ module.exports = function(app, passport) {
     app.post('/api/user/company', isAuthedAPI, function(req, res) {
         api.user().company().put(req, res);
     });
+    app.get('/api/company/get', isAuthedAPI, function(req, res) {
+        api.company().get(req, res);
+    });
     /*
     * User Routing
     */

@@ -24,7 +24,7 @@ append content
                         td #{company.symbol}
                         td #{company.name}
                         td #{company.market}
-                        td
+                        td #{company.quotes[company.quotes.length - 1].LastPrice}
     script(type='text/javascript', src='/vendor/jquery/jquery.min.js')     
     script(type='text/javascript', src='/vendor/jquery-ui/jquery-ui.min.js')   
     script(type='text/javascript', src='/javascripts/api.js')  
