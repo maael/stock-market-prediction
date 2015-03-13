@@ -1,10 +1,14 @@
 html, body {
     height: 100%;
 }
+
 body {
     background-color: $lightGrey;
     font-family: $font;
     font-size: 1em;
+    & > svg {
+        height: 0;
+    }
 }
 
 a {
@@ -90,6 +94,98 @@ a {
         & > .selected {
             background-color: $darkGreen;
         }
+    }
+}
+
+.splash-header {
+    background-color: $green;
+    color: $textOnGreen;
+    font-weight: bold;
+    height: 20vh;
+    padding: 1em 0;
+    position: relative;
+    width: 100%;
+    .hex-row {
+        display: inline-block;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .hex {
+            position: relative;
+            float: left;
+            width: 6em;
+            height: 10em;
+            z-index: 100;
+            margin-left: 5em;
+            margin-right: 5em;
+            background: $lightGreen;
+            transition: all 0.2s;
+            line-height: 10em;
+            text-align: center;
+            &:before{
+                content: " ";
+                position: absolute;
+                left: -3em;
+                border-right: 3em solid $lightGreen;
+                border-top: 5em solid transparent;
+                border-bottom: 5em solid transparent;
+                z-index: 100;
+                transition: all 0.2s;
+                top: 0;
+            }
+            &:after {
+                content: " ";
+                position: absolute;
+                right: -3em;
+                border-left: 3em solid $lightGreen;
+                border-top: 5em solid transparent;
+                border-bottom: 5em solid transparent;
+                z-index: 100;
+                transition: all 0.2s;
+                top: 0;
+            }
+            .hex-content {
+                line-height: 1.25em;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                i {
+                    font-size: 3em;
+                }
+            }
+        }
+    }
+}
+
+.splash-content {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1em;
+    text-align: center;
+    width: 80%;
+    p {
+        margin: 1em auto;
+    }
+    .loginRegisterZone {
+        margin: 0 auto;
+        text-align: center;
+        width: 20em;
+    }
+    .loginButton, .registerButton {
+        background-color: $green;
+        border: none;
+        border-radius: 0.3em;
+        color: $textOnGreen;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 1em 1em 2em 1em;
+        padding: 1em;
+        text-align: center;
+        text-decoration: none;
+        width: 6em;
     }
 }
 

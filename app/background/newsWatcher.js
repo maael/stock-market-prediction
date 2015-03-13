@@ -12,7 +12,6 @@ var properties = [];
     run();
     setInterval(run, interval);
     function run() {
-        console.log('Run newsWatcher at [' + moment().format('HH:mm') + '] | Refreshing at [' + moment().add(1, 'minutes').format('HH:mm') + ']');
         for(var i = 0; i < watchFeeds.length; i++) (function(index) {
             if(watchFeeds[index].enabled) {
                 var feed = {};

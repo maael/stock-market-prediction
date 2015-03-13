@@ -1,3 +1,34 @@
 extend fragments/_header
 append content
-    p Index
+    div.splash-header
+        div.hex-row
+            div.hex
+                div.hex-content
+                    i.icon-briefcase
+                    p Track companies
+            div.hex
+                div.hex-content
+                    i.icon-newspaper
+                    p Stay up to date on news
+            div.hex
+                div.hex-content
+                    i.icon-chart-line
+                    p See the effect
+    div.splash-content
+        p Stock Market Prediction is a decision aid designed to allow novice traders get started.
+        p Other tools look only at the statistical side of the markets, however they can be influenced greatly by what's going on in the world.
+        p Stock Market Prediction is a tool that takes this into account, and makes predictions based on them.
+        p Interested? Make an account and try it out, it's free to try!
+        p You can even login with your favourite social network accounts!
+        p
+            i.icon-facebook.colour-facebook
+            i.icon-twitter.colour-twitter
+            i.icon-gplus.colour-gplus
+            i.icon-linkedin.colour-linkedin
+        div.loginRegisterZone
+            a(href='/login').loginButton 
+                i.icon-login
+                | Login
+            a(href='/register').loginButton 
+                i.icon-user
+                | Register
