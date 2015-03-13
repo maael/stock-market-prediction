@@ -1,6 +1,7 @@
 var User = require('./models/user'),
     Company = require('./models/company'),
     Following = require('./models/following'),
+    News = require('./models/news'),
     ObjectId = require('mongoose').Types.ObjectId;
 var controllers = (function() {
   /*
@@ -189,7 +190,27 @@ var controllers = (function() {
   */
   function news() {
     function list(req, res) {
-
+      News.find().sort({date: -1}).exec(function(err, news) {
+        var limit = 25,
+            returnedNews = [];
+        if(err) { 
+          throw err; 
+        } else {
+          if(news.length) {
+            for(var i = 0; i < news.length; i++) {
+              var j = 0;
+              while(((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) && j < news[i].articles.length) {
+                returnedNews.push(news[i].articles[j]._doc[0]);
+                j++;
+              }
+            }
+          }
+          res.render('news/list', {
+            user: req.user,
+            news: returnedNews
+          });
+        }
+      });
     };
     function view(req, res) {
 

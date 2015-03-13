@@ -1,3 +1,5 @@
 extend ../fragments/_auth_header
 append content
-    p News
+    h4 News
+    each article in news
+        p #{article.title}
