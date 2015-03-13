@@ -7,7 +7,7 @@ var parser = require('parse-rss'),
     NewsArticle = require('../models/newsArticle');
 var properties = [];
 (function() {
-    var interval = 60000; // 1 minute
+    var interval = 1800000; // 30 minutes
     mongoose.connect(dbConfig.url);
     run();
     setInterval(run, interval);
