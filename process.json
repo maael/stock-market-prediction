@@ -16,4 +16,13 @@
     "out_file"    : "./.log/quoter.log",
     "pid_file"    : "./.log/quoter.pid",
     "exec_mode"   : "fork"
+}, {
+    "name"        : "newsWatcher",
+    "script"      : "./app/background/newsWatcher.js",
+    "instances"   : 1,
+    "log_file"    : "./.log/quoter.log",
+    "error_file"  : "./.log/quoter.log",
+    "out_file"    : "./.log/quoter.log",
+    "pid_file"    : "./.log/quoter.pid",
+    "exec_mode"   : "fork"
 }]
