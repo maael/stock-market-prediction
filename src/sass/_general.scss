@@ -18,7 +18,7 @@ a {
 .main-header {
     background-color: $green;
     color: $textOnGreen;
-    font-size: 3em;
+    font-size: 7vh;
     font-weight: bold;
     text-align: center;
     padding: 1em 0;
@@ -81,6 +81,7 @@ a {
             font-size: 3em;
             height: 2em;
             padding: 0.5em 0;
+            position: relative;
             text-align: center;
             text-decoration: none;
             p {
@@ -93,6 +94,12 @@ a {
         }
         & > .selected {
             background-color: $darkGreen;
+        }
+        .menu-option {
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
     }
 }
@@ -114,11 +121,11 @@ a {
         .hex {
             position: relative;
             float: left;
-            width: 6em;
-            height: 10em;
-            z-index: 100;
-            margin-left: 5em;
-            margin-right: 5em;
+            width: 6vw;
+            height: 10vw;
+            z-index: 1vw;
+            margin-left: 5vw;
+            margin-right: 5vw;
             background: $lightGreen;
             transition: all 0.2s;
             line-height: 10em;
@@ -126,10 +133,10 @@ a {
             &:before{
                 content: " ";
                 position: absolute;
-                left: -3em;
-                border-right: 3em solid $lightGreen;
-                border-top: 5em solid transparent;
-                border-bottom: 5em solid transparent;
+                left: -2.95vw;
+                border-right: 3vw solid $lightGreen;
+                border-top: 5vw solid transparent;
+                border-bottom: 5vw solid transparent;
                 z-index: 100;
                 transition: all 0.2s;
                 top: 0;
@@ -137,21 +144,23 @@ a {
             &:after {
                 content: " ";
                 position: absolute;
-                right: -3em;
-                border-left: 3em solid $lightGreen;
-                border-top: 5em solid transparent;
-                border-bottom: 5em solid transparent;
+                right: -2.9vw;
+                border-left: 3vw solid $lightGreen;
+                border-top: 5vw solid transparent;
+                border-bottom: 5vw solid transparent;
                 z-index: 100;
                 transition: all 0.2s;
                 top: 0;
             }
             .hex-content {
-                line-height: 1.25em;
+                font-size: 1vw;
+                line-height: 1.25vw;
                 position: relative;
                 top: 50%;
                 transform: translateY(-50%);
+                z-index: 999;
                 i {
-                    font-size: 3em;
+                    font-size: 3vw;
                 }
             }
         }
@@ -166,6 +175,9 @@ a {
     width: 80%;
     p {
         margin: 1em auto;
+    }
+    .socialIcons {
+        padding: 1em;
     }
     .loginRegisterZone {
         margin: 0 auto;

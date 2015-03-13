@@ -12,7 +12,7 @@ body(data-symbol='#{companySymbol}')
   section.main-menu
     div.menu
         a(href='/user')
-          div
+          div.menu-option
               i.icon-user 
               if user.facebook.name
                 p #{user.facebook.name}
@@ -24,14 +24,16 @@ body(data-symbol='#{companySymbol}')
                 p #{user.linkedin.name}
               else if user.local.email
                 p #{user.local.email}
-        div
+        a(href='/trends')
+          div.menu-option
             i.icon-chart-line 
             p Trends
         a(href='/companies')
-          div.selected
+          div.menu-option.selected
               i.icon-briefcase
               p Companies
-        div
+        a(href='/news')
+          div.menu-option
             i.icon-newspaper 
             p News
 
