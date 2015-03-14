@@ -13,6 +13,7 @@ body {
 
 a {
     color: inherit;
+    text-decoration: none;
 }
 
 .main-header {
@@ -418,5 +419,45 @@ a {
     td {
         cursor: pointer;
         padding: 0.25em;
+    }
+}
+
+.news {
+    .article {
+        background-color: $darkerGrey;
+        box-sizing: border-box;
+        display: table;
+        margin: 0.5em auto;
+        width: 100%;
+        &:nth-child(odd) {
+            background-color: $darkGrey;
+        }
+        & > * {
+            box-sizing: border-box;
+            display: table-cell;
+            padding: 0.5em;
+            vertical-align: middle;
+        }
+        .title {
+            font-weight: bold;
+            width: 25%;
+        }
+        .date {
+            background-color: $green;
+            color: $textOnGreen;
+            width: 13%;
+        }
+        .description {
+            clear: both;
+            width: 54%;
+        }
+        .link {
+            text-align: right;
+            width: 8%;
+            &:hover {
+                background-color: $green;
+                color: $textOnGreen;
+            }
+        }
     }
 }

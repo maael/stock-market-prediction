@@ -1,5 +1,15 @@
 extend ../fragments/_auth_header
 append content
     h4 News
-    each article in news
-        p #{article.title}
+    div.news
+        each article in news
+            div.article
+                div.date
+                    i.icon-clock 
+                    | #{article.date}
+                div.title #{article.title}
+                div.description #{article.description}
+                div.link 
+                    a(href=article.link) 
+                        | Read More
+                        i.icon-link-ext

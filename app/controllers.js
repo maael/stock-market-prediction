@@ -2,7 +2,8 @@ var User = require('./models/user'),
     Company = require('./models/company'),
     Following = require('./models/following'),
     News = require('./models/news'),
-    ObjectId = require('mongoose').Types.ObjectId;
+    ObjectId = require('mongoose').Types.ObjectId,
+    moment = require('moment');
 var controllers = (function() {
   /*
   * Index Controllers
@@ -200,11 +201,24 @@ var controllers = (function() {
             for(var i = 0; i < news.length; i++) {
               var j = 0;
               while(((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) && j < news[i].articles.length) {
-                returnedNews.push(news[i].articles[j]._doc[0]);
+                var doc = news[i].articles[j]._doc[0];
+                doc.date = moment(doc.date).format('DD/MM/YYYY H:mm').toString();
+                returnedNews.push(doc);
                 j++;
               }
             }
           }
+          returnedNews.sort(function(a, b) {
+            var aDate = moment(a.date, 'DD/MM/YYYY H:mm'),
+                bDate = moment(b.date, 'DD/MM/YYYY H:mm');
+            if(aDate.isAfter(bDate)) {
+              return -1;
+            } else if (aDate.isBefore(bDate)) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
           res.render('news/list', {
             user: req.user,
             news: returnedNews
