@@ -457,10 +457,9 @@ a {
                 max-height: 10vh;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                br {
-                    display: none;
-                }
-                .feedflare {
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                br, img, .feedflare {
                     display: none;
                 }
             }
