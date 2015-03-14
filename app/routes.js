@@ -13,19 +13,25 @@ module.exports = function(app, passport) {
         if(req.isAuthenticated()) { return next(); }
     }
     /* Parameters */
-
     app.param('company', function(req, res, next, symbol) {
         controllers.companies().get(req, res, next, symbol);
     });
 
 
     /*
+    * Terry Pratchett Tribute
+    * “A man's not dead while his name is still spoken”
+    */
+    app.get('/*',function(req,res,next){
+        res.header('X-Clacks-Overhead' , 'GNU Terry Pratchett');
+        next();
+    });
+    /*
     * Index Routing
     */
     app.get('/', function(req, res){
         controllers.index(req, res);
     });
-
     /*
     * Dashboard Routing
     */

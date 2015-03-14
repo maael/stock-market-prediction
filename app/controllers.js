@@ -3,7 +3,8 @@ var User = require('./models/user'),
     Following = require('./models/following'),
     News = require('./models/news'),
     ObjectId = require('mongoose').Types.ObjectId,
-    moment = require('moment');
+    moment = require('moment'),
+    frequency = require('word-frequency');
 var controllers = (function() {
   /*
   * Index Controllers
@@ -193,21 +194,51 @@ var controllers = (function() {
     function list(req, res) {
       News.find().sort({date: -1}).exec(function(err, news) {
         var limit = 25,
-            returnedNews = [];
+            returnedNews = [],
+            articlesText = '';
         if(err) { 
           throw err; 
         } else {
           if(news.length) {
             for(var i = 0; i < news.length; i++) {
-              var j = 0;
-              while(((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) && j < news[i].articles.length) {
-                var doc = news[i].articles[j]._doc[0];
-                doc.date = moment(doc.date).format('DD/MM/YYYY H:mm').toString();
-                returnedNews.push(doc);
-                j++;
+              news[i].articles.sort(function(a, b) {
+                var aDate = moment(a._doc[0].date, 'DD/MM/YYYY H:mm'),
+                    bDate = moment(b._doc[0].date, 'DD/MM/YYYY H:mm');
+                if(aDate.isAfter(bDate)) {
+                  return -1;
+                } else if (aDate.isBefore(bDate)) {
+                  return 1;
+                } else {
+                  return 0;
+                }
+              });
+              for(var j = 0; j < news[i].articles.length; j++) {
+                if((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) {
+                  var doc = news[i].articles[j]._doc[0];
+                  doc.description = doc.description.replace('Continue reading...', '');
+                  doc.description = doc.description.replace('<br>', '');
+                  doc.date = moment(doc.date).format('DD/MM/YYYY H:mm').toString();
+                  returnedNews.push(doc);
+                }
+                articlesText += doc.title + ' ' + doc.description + ' ';
               }
             }
           }
+          var frequencies = frequency(articlesText),
+              topFrequencies = [],
+              limit = 10;
+          var commonWords = require('../config/commonWords');
+          for(var word in frequencies) {
+            if(frequencies.hasOwnProperty(word)) {
+              if(commonWords.indexOf(word) === -1) {
+                topFrequencies.push([word, frequencies[word]]);
+              }
+            }
+          }
+          topFrequencies.sort(function(a, b) {
+            return b[1] - a[1];
+          });
+          topFrequencies = topFrequencies.slice(0, limit);       
           returnedNews.sort(function(a, b) {
             var aDate = moment(a.date, 'DD/MM/YYYY H:mm'),
                 bDate = moment(b.date, 'DD/MM/YYYY H:mm');

@@ -24,6 +24,10 @@ body(data-symbol='#{companySymbol}')
                 p #{user.linkedin.name}
               else if user.local.email
                 p #{user.local.email}
+        a(href='/activity')
+          div.menu-option
+            i.icon-list-alt
+            p Activity
         a(href='/trends')
           div.menu-option
             i.icon-chart-line 

@@ -8,7 +8,8 @@ append content
                     i.icon-clock 
                     | #{article.date}
                 div.title #{article.title}
-                div.description #{article.description}
+                div.description
+                    div.description-container!= article.description
                 div.link 
                     a(href=article.link) 
                         | Read More

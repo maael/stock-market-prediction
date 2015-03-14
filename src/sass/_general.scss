@@ -445,15 +445,29 @@ a {
         .date {
             background-color: $green;
             color: $textOnGreen;
-            width: 13%;
+            width: 17%;
         }
         .description {
             clear: both;
-            width: 54%;
+            width: 46%;
+            a {
+                color: $green;
+            }
+            .description-container {
+                max-height: 10vh;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                br {
+                    display: none;
+                }
+                .feedflare {
+                    display: none;
+                }
+            }
         }
         .link {
             text-align: right;
-            width: 8%;
+            width: 12%;
             &:hover {
                 background-color: $green;
                 color: $textOnGreen;
