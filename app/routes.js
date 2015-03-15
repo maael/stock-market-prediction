@@ -71,31 +71,31 @@ module.exports = function(app, passport) {
         controllers.user().connect(req, res);
     });
     app.post('/connect/local', passport.authenticate('local-register', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login',
         failureFlash: true
     }));
     app.get('/connect/facebook', passport.authorize('facebook', { scope: 'email' }));
     app.get('/connect/facebook/callback', passport.authorize('facebook', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login',
         failureFlash: true
     }));
     app.get('/connect/twitter', passport.authorize('twitter', { scope: 'email' }));
     app.get('/connect/twitter/callback', passport.authorize('twitter', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login',
         failureFlash: true
     }));
     app.get('/connect/google', passport.authorize('google', { scope: ['profile', 'email'] }));
     app.get('/connect/google/callback', passport.authorize('google', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login',
         failureFlash: true
     }));
     app.get('/connect/linkedin', passport.authorize('linkedin'));
     app.get('/connect/linkedin/callback', passport.authorize('linkedin', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login',
         failureFlash: true
     }));
@@ -104,28 +104,28 @@ module.exports = function(app, passport) {
         controllers.user().login(req, res);
     });
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login',
         failureFlash: true
     }));
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login'
     }));
     app.get('/auth/twitter', passport.authenticate('twitter'));
     app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login'
     }));
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get('/auth/google/callback', passport.authenticate('google', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login'
     }));
     app.get('/auth/linkedin', passport.authenticate('linkedin'));
     app.get('/auth/linkedin/callback', passport.authenticate('linkedin', {
-        successRedirect: '/user',
+        successRedirect: '/feed',
         failureRedirect: '/login'
     }));
     app.get('/logout', function(req, res) {
