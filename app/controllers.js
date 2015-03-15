@@ -176,7 +176,9 @@ var controllers = (function() {
   */
   function feed() {
     function list(req, res) {
-      res.render('feed/list');
+      res.render('feed/list', {
+        user: req.user
+      });
     };
     function view(req, res) {
       res.render('feed/detail');
