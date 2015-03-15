@@ -37,7 +37,7 @@ var properties = [];
                             article.categories = rss[j].categories;
                             article.feed = feed;
                             News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
-                                if(err) { throw err; }
+                                if(err && (err.code !== 11000)) { throw err; }
                             });
                         }
                     }

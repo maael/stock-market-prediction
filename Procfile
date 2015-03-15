@@ -1,1 +1,1 @@
-web: ./backupStart.sh
+web: node index.js
