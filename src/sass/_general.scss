@@ -453,15 +453,15 @@ a {
             a {
                 color: $green;
             }
+            br, img, .feedflare {
+                display: none;
+            }
             .description-container {
                 max-height: 10vh;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 -webkit-line-clamp: 5;
                 -webkit-box-orient: vertical;
-                br, img, .feedflare {
-                    display: none;
-                }
             }
         }
         .link {
