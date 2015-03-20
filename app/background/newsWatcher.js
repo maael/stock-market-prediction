@@ -5,7 +5,8 @@ var parser = require('parse-rss'),
     mongoose = require('mongoose'),
     News = require('../models/news'),
     NewsArticle = require('../models/newsArticle'),
-    Process = require('../models/process');
+    Process = require('../models/process'),
+    lexicalAnalyser = require('./lexicalAnalyser');
 var properties = [];
 (function() {
     var count = 0,
