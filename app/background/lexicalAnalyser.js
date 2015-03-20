@@ -1,6 +1,6 @@
 var frequency = require('word-frequency'),
     Word = require('../models/word'),
-    WordList = require('../models/WordList'),
+    WordList = require('../models/wordList'),
     mongoose = require('mongoose'),
     dbConfig = require('../../config/db');
 mongoose.connect(dbConfig.url);
