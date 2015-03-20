@@ -52,10 +52,13 @@ var properties = [];
                             article.feed = feed;
                             News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
                                 if(err && (err.code !== 11000)) { throw err; }
-                                process.lastUpdated = moment().toISOString();                    
-                                Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
-                                    if(err) { throw err; }
-                                });
+                                if(!err) {
+                                    lexicalAnalyser(article.title);
+                                    process.lastUpdated = moment().toISOString();                    
+                                    Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+                                        if(err) { throw err; }
+                                    });
+                                }
                             });
                         }
                     }

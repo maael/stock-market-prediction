@@ -1,10 +1,10 @@
 var mongoose = require('mongoose'),
-    Word = require('word');
+    Word = require('./word');
 
 var wordListSchema = mongoose.Schema({
     numberOfWords: Number,
-    words: [Word]
-}, {_id: false}););
+    words: [Word.schema]
+});
 
 wordListSchema.statics.stopList = function stopList(threshold, cb) {
     var stopListArr = [];
