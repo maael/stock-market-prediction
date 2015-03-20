@@ -34,7 +34,4 @@ var lexicalAnalyser = function (text) {
         });
     });
 };
-WordList.stopList(3, function() {
-    console.log();
-});
-//module.exports = lexicalAnalyser;
+module.exports = lexicalAnalyser;
