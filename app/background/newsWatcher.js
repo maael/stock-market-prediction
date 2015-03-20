@@ -22,7 +22,7 @@ var properties = [];
             lastRun: moment().toISOString(),
             runs: count
         });
-        Process.update({_id: process._id}, process.toObject(), {upsert: true}, function(err) {
+        Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
             if(err) { throw err; }
         });
         for(var i = 0; i < watchFeeds.length; i++) (function(index) {
@@ -51,6 +51,10 @@ var properties = [];
                             article.feed = feed;
                             News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
                                 if(err && (err.code !== 11000)) { throw err; }
+                                process.lastUpdated = moment().toISOString();                    
+                                Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+                                    if(err) { throw err; }
+                                });
                             });
                         }
                     }

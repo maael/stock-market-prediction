@@ -26,7 +26,7 @@ var request = require('request'),
             lastRun: moment().toISOString(),
             runs: count
         });
-        Process.update({_id: process._id}, process.toObject(), {upsert: true}, function(err) {
+        Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
             if(err) { throw err; }
         });
         Company.find({}, function(err, companies) {
@@ -41,6 +41,10 @@ var request = require('request'),
                         }
                         company.save(function(err, company) {
                             if(err) { throw err; }
+                            process.lastUpdated = moment().toISOString();                    
+                            Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+                                if(err) { throw err; }
+                            });
                         });
                     }
                 });                
