@@ -8,4 +8,8 @@ var processSchema = mongoose.Schema({
     runs: Number
 }, {_id: false});
 
+processSchema.statics.incrementRuns = function(processName, callback) {
+    return this.collection.findAndModify({name: processName}, [], { $inc: {runs: 1}}, callback);
+}
+
 module.exports = mongoose.model('Process', processSchema);

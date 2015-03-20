@@ -196,8 +196,7 @@ var controllers = (function() {
     function list(req, res) {
       News.find().sort({date: -1}).exec(function(err, news) {
         var limit = 25,
-            returnedNews = [],
-            articlesText = '';
+            returnedNews = [];
         if(err) { 
           throw err; 
         } else {
@@ -206,13 +205,9 @@ var controllers = (function() {
               news[i].articles.sort(function(a, b) {
                 var aDate = moment(a._doc[0].date, 'DD/MM/YYYY H:mm'),
                     bDate = moment(b._doc[0].date, 'DD/MM/YYYY H:mm');
-                if(aDate.isAfter(bDate)) {
-                  return -1;
-                } else if (aDate.isBefore(bDate)) {
-                  return 1;
-                } else {
-                  return 0;
-                }
+                if(aDate.isAfter(bDate)) { return -1; } 
+                else if (aDate.isBefore(bDate)) { return 1; } 
+                else { return 0; }
               });
               for(var j = 0; j < news[i].articles.length; j++) {
                 if((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) {
@@ -222,35 +217,15 @@ var controllers = (function() {
                   doc.date = moment(doc.date).format('DD/MM/YYYY H:mm').toString();
                   returnedNews.push(doc);
                 }
-                articlesText += doc.title + ' ' + doc.description + ' ';
               }
             }
-          }
-          var frequencies = frequency(articlesText),
-              topFrequencies = [],
-              limit = 10;
-          var stopList = require('../config/stopList');
-          for(var word in frequencies) {
-            if(frequencies.hasOwnProperty(word)) {
-              if(stopList.indexOf(word) === -1) {
-                topFrequencies.push([word, frequencies[word]]);
-              }
-            }
-          }
-          topFrequencies.sort(function(a, b) {
-            return b[1] - a[1];
-          });
-          topFrequencies = topFrequencies.slice(0, limit);       
+          }    
           returnedNews.sort(function(a, b) {
             var aDate = moment(a.date, 'DD/MM/YYYY H:mm'),
                 bDate = moment(b.date, 'DD/MM/YYYY H:mm');
-            if(aDate.isAfter(bDate)) {
-              return -1;
-            } else if (aDate.isBefore(bDate)) {
-              return 1;
-            } else {
-              return 0;
-            }
+            if(aDate.isAfter(bDate)) { return -1; } 
+            else if (aDate.isBefore(bDate)) { return 1; } 
+            else { return 0; }
           });
           res.render('news/list', {
             user: req.user,

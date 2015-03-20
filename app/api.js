@@ -3,6 +3,7 @@ var http = require('http'),
     MarketData = require('./models/marketData'),
     Company = require('./models/company'),
     Following = require('./models/following'),
+    News = require('./models/news'),
     request = require('request');
 
 
@@ -156,9 +157,56 @@ var api = (function() {
       put: put
     };
   };
+  /*
+  * News APIs
+  */
+  function news() {
+    function get(req, res) {
+      News.find().sort({date: -1}).exec(function(err, news) {
+        var limit = req.query.limit || 25,
+            returnedNews = [];
+        if(err) { 
+          throw err; 
+        } else {
+          if(news.length) {
+            for(var i = 0; i < news.length; i++) {
+              news[i].articles.sort(function(a, b) {
+                var aDate = moment(a._doc[0].date, 'DD/MM/YYYY H:mm'),
+                    bDate = moment(b._doc[0].date, 'DD/MM/YYYY H:mm');
+                if(aDate.isAfter(bDate)) { return -1; } 
+                else if (aDate.isBefore(bDate)) { return 1; } 
+                else { return 0; }
+              });
+              for(var j = 0; j < news[i].articles.length; j++) {
+                if((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) {
+                  var doc = news[i].articles[j]._doc[0];
+                  doc.description = doc.description.replace('Continue reading...', '');
+                  doc.description = doc.description.replace('<br>', '');
+                  doc.date = moment(doc.date).format('DD/MM/YYYY H:mm').toString();
+                  returnedNews.push(doc);
+                }
+              }
+            }
+          }    
+          returnedNews.sort(function(a, b) {
+            var aDate = moment(a.date, 'DD/MM/YYYY H:mm'),
+                bDate = moment(b.date, 'DD/MM/YYYY H:mm');
+            if(aDate.isAfter(bDate)) { return -1; } 
+            else if (aDate.isBefore(bDate)) { return 1; } 
+            else { return 0; }
+          });
+          res.json(returnedNews);
+        }
+      });
+    }
+    return {
+      get: get
+    };
+  };
   return {
     user: user,
-    company: company
+    company: company,
+    news: news
   };
 })();
 
