@@ -1,0 +1,21 @@
+module.exports = [
+    'the',
+    'of',
+    'and',
+    'a',
+    'in',
+    'to',
+    'is',
+    's',
+    'for',
+    'on',
+    'with',
+    'from',
+    'are',
+    'by',
+    'as',
+    'it',
+    'you',
+    'at',
+    'was'
+];
