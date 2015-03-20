@@ -1,9 +1,6 @@
 var frequency = require('word-frequency'),
     Word = require('../models/word'),
-    WordList = require('../models/wordList'),
-    mongoose = require('mongoose'),
-    dbConfig = require('../../config/db');
-mongoose.connect(dbConfig.url);
+    WordList = require('../models/wordList');
 var lexicalAnalyser = function (text) {
     var frequencies = frequency(text),
         words = [];
