@@ -7,9 +7,14 @@ var request = require('request'),
 
 (function() {
     var count = 0,
-        started = moment().toISOString(),
-        interval = 1800000; // 30 minutes
+    interval = 1800000; // 30 minutes
     mongoose.connect(dbConfig.url);
+    // Process Setup
+    var process = new Process({
+        name: 'marketQuoter',
+        started: moment().toISOString()
+    });
+    // Start process running
     run();
     setInterval(run, interval);
     function run() {
@@ -20,12 +25,8 @@ var request = require('request'),
             return false;
         }
         count++;
-        var process = new Process({
-            name: 'marketQuoter',
-            started: started,
-            lastRun: moment().toISOString(),
-            runs: count
-        });
+        process.lastRun = moment().toISOString();
+        process.runs = count;
         Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
             if(err) { throw err; }
         });

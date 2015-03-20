@@ -229,10 +229,10 @@ var controllers = (function() {
           var frequencies = frequency(articlesText),
               topFrequencies = [],
               limit = 10;
-          var commonWords = require('../config/commonWords');
+          var stopList = require('../config/stopList');
           for(var word in frequencies) {
             if(frequencies.hasOwnProperty(word)) {
-              if(commonWords.indexOf(word) === -1) {
+              if(stopList.indexOf(word) === -1) {
                 topFrequencies.push([word, frequencies[word]]);
               }
             }
