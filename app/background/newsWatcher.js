@@ -4,14 +4,27 @@ var parser = require('parse-rss'),
     dbConfig = require('../../config/db'),
     mongoose = require('mongoose'),
     News = require('../models/news'),
-    NewsArticle = require('../models/newsArticle');
+    NewsArticle = require('../models/newsArticle'),
+    Process = require('../models/process');
 var properties = [];
 (function() {
-    var interval = 1800000; // 30 minutes
+    var count = 0,
+        started = moment().toISOString(),
+        interval = 1800000; // 30 minutes
     mongoose.connect(dbConfig.url);
     run();
     setInterval(run, interval);
     function run() {
+        count++;
+        var process = new Process({
+            name: 'newsWatcher',
+            started: started,
+            lastRun: moment().toISOString(),
+            runs: count
+        });
+        Process.update({_id: process._id}, process.toObject(), {upsert: true}, function(err) {
+            if(err) { throw err; }
+        });
         for(var i = 0; i < watchFeeds.length; i++) (function(index) {
             if(watchFeeds[index].enabled) {
                 var feed = {};

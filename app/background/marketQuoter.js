@@ -1,11 +1,14 @@
 var request = require('request'),
     mongoose = require('mongoose'),
+    moment = require('moment'),
     Company = require('../models/company'),
+    Process = require('../models/process'),
     dbConfig = require('../../config/db');
 
 (function() {
-    var count = 0;
-    var interval = 1800000; // 30 minutes
+    var count = 0,
+        started = moment().toISOString(),
+        interval = 1800000; // 30 minutes
     mongoose.connect(dbConfig.url);
     run();
     setInterval(run, interval);
@@ -17,6 +20,15 @@ var request = require('request'),
             return false;
         }
         count++;
+        var process = new Process({
+            name: 'marketQuoter',
+            started: started,
+            lastRun: moment().toISOString(),
+            runs: count
+        });
+        Process.update({_id: process._id}, process.toObject(), {upsert: true}, function(err) {
+            if(err) { throw err; }
+        });
         Company.find({}, function(err, companies) {
             if(err) { throw err; }
             for(var i = 0; i < companies.length; i++) {
