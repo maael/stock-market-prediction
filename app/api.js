@@ -1,9 +1,11 @@
 var http = require('http'),
     moment = require('moment'),
+    netConfig = require('netConfig'),
     MarketData = require('./models/marketData'),
     Company = require('./models/company'),
     Following = require('./models/following'),
     News = require('./models/news'),
+    Network = require('./models/network'),
     request = require('request');
 
 
@@ -111,6 +113,18 @@ var api = (function() {
                   follow.company = saved._id;
                   follow.save(function(err) {
                     if(err) res.send(err);
+                    var newSymbolNetwork = netConfig.generate();
+                    newNetwork = new Network({
+                        symbol: company.symbol,
+                        network: {
+                            inputs: newSymbolNetwork.getLayer(0),
+                            hiddens: newSymbolNetwork.getLayer(1),
+                            outputs: newSymbolNetwork.getLayer(2)
+                        }
+                    });
+                    newNetwork.save(function(err) {
+                        if(err) { throw err; }
+                    });
                     res.json({message: 'success'});
                   });
                 }); 
