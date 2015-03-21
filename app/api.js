@@ -165,13 +165,13 @@ var api = (function() {
       var limit = req.query.limit || 25,
           news = [],
           returnedNews = [];
-      var stream = News.find().sort({date: -1}).stream();
+      var stream = News.find().sort({date: -1}).limit(10).stream();
       stream.on('data', function(doc) {
         news.push(doc);
       });
       stream.on('close', function(err) {
         if(err) { 
-          throw err; 
+          res.json({error: err});
         } else {
           if(news.length) {
             for(var i = 0; i < news.length; i++) {

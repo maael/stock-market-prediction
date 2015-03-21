@@ -2,20 +2,19 @@ get(window.location.origin + '/api/news/get', function(response) {
     var news = JSON.parse(response),
         newsElement = document.getElementsByClassName('news')[0],
         loadingElement = document.getElementById('loading');
-    for(var i = 0; i < news.length; i++) {
-        var article = news[i],
-        articleDiv = document.createElement('div'),
-        dateDiv = document.createElement('div'),
-        dateIcon = document.createElement('i'),
-        dateText = document.createTextNode(article.date),
-        titleDiv = document.createElement('div'),
-        titleText = document.createTextNode(article.title),
-        descDiv = document.createElement('div'),
-        descContainer = document.createElement('div'),
-        linkDiv = document.createElement('div'),
-        linkA = document.createElement('a'),
-        linkText = document.createTextNode('Read More'),
-        linkIcon = document.createElement('i');
+    function makeArticle(article) {
+        var articleDiv = document.createElement('div'),
+            dateDiv = document.createElement('div'),
+            dateIcon = document.createElement('i'),
+            dateText = document.createTextNode(article.date),
+            titleDiv = document.createElement('div'),
+            titleText = document.createTextNode(article.title),
+            descDiv = document.createElement('div'),
+            descContainer = document.createElement('div'),
+            linkDiv = document.createElement('div'),
+            linkA = document.createElement('a'),
+            linkText = document.createTextNode('Read More'),
+            linkIcon = document.createElement('i');
 
         linkIcon.className = 'icon-link-ext';
         linkDiv.className = 'link';
@@ -44,9 +43,31 @@ get(window.location.origin + '/api/news/get', function(response) {
         articleDiv.appendChild(descDiv);
         articleDiv.appendChild(linkDiv);
         
-        if((typeof(loadingElement) !== 'undefined') && (i == 0)) {
-            newsElement.removeChild(loadingElement);
+        return articleDiv;   
+    }
+    function makeError(error) {
+        var errorDiv = document.createElement('div'),
+            errorIcon = document.createElement('i'),
+            errorText = document.createTextNode('An error occured!');
+
+        errorDiv.className = 'error';
+        errorIcon.className = 'icon-warning';
+
+        errorDiv.appendChild(errorIcon);
+        errorDiv.appendChild(errorText);
+
+        return errorDiv;
+    }
+    if(!response.hasOwnProperty('error')) {
+        for(var i = 0; i < news.length; i++) {
+            var article = news[i];
+            if((typeof(loadingElement) !== 'undefined') && (i == 0)) {
+                newsElement.removeChild(loadingElement);
+            }
+            newsElement.appendChild(makeArticle(article));
         }
-        newsElement.appendChild(articleDiv);
+    } else {
+        newsElement.removeChild(loadingElement);
+        newsElement.appendChild(makeError(response.err));
     }
 });
