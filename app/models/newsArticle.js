@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var newsArticleSchema = mongoose.Schema({
-	guid: { type: String, unique: true },
+	guid: { type: String, unique: true, index: true },
     title: String,
     description: String,
     date: String,
@@ -14,7 +14,5 @@ var newsArticleSchema = mongoose.Schema({
         feedType: String
     }
 }, {_id: false});
-
-newsArticleSchema.index({guid: 1});
 
 module.exports = mongoose.model('NewsArticle', newsArticleSchema);
