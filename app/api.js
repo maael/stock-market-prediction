@@ -162,9 +162,14 @@ var api = (function() {
   */
   function news() {
     function get(req, res) {
-      News.find().sort({date: -1}).exec(function(err, news) {
-        var limit = req.query.limit || 25,
-            returnedNews = [];
+      var limit = req.query.limit || 25,
+          news = [],
+          returnedNews = [];
+      var stream = News.find().sort({date: -1}).stream();
+      stream.on('data', function(doc) {
+        news.push(doc);
+      });
+      stream.on('close', function(err) {
         if(err) { 
           throw err; 
         } else {
