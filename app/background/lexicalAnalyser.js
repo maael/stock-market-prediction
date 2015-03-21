@@ -37,6 +37,6 @@ var lexicalAnalyser = function (text) {
     }
     Process.incrementRuns('lexicalAnalyser', function(err) {
         if(err) { throw err; }
-    })
+    });
 };
 module.exports = lexicalAnalyser;
