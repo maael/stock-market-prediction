@@ -1,6 +1,6 @@
 var http = require('http'),
     moment = require('moment'),
-    netConfig = require('netConfig'),
+    netConfig = require('./network/configuration'),
     MarketData = require('./models/marketData'),
     Company = require('./models/company'),
     Following = require('./models/following'),
