@@ -2,15 +2,7 @@ extend ../fragments/_auth_header
 append content
     h4 News
     div.news
-        each article in news
-            div.article
-                div.date
-                    i.icon-clock 
-                    | #{article.date}
-                div.title #{article.title}
-                div.description
-                    div.description-container!= article.description
-                div.link 
-                    a(href=article.link) 
-                        | Read More
-                        i.icon-link-ext
+        div#loading Loading News
+            i.icon-arrows-cw
+    script(type='text/javascript', src='/javascripts/api.js')  
+    script(type='text/javascript', src='/javascripts/news.js')

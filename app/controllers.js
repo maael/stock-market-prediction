@@ -194,44 +194,8 @@ var controllers = (function() {
   */
   function news() {
     function list(req, res) {
-      News.find().sort({date: -1}).exec(function(err, news) {
-        var limit = 25,
-            returnedNews = [];
-        if(err) { 
-          throw err; 
-        } else {
-          if(news.length) {
-            for(var i = 0; i < news.length; i++) {
-              news[i].articles.sort(function(a, b) {
-                var aDate = moment(a._doc[0].date, 'DD/MM/YYYY H:mm'),
-                    bDate = moment(b._doc[0].date, 'DD/MM/YYYY H:mm');
-                if(aDate.isAfter(bDate)) { return -1; } 
-                else if (aDate.isBefore(bDate)) { return 1; } 
-                else { return 0; }
-              });
-              for(var j = 0; j < news[i].articles.length; j++) {
-                if((typeof(limit) !== 'undefined') && (returnedNews.length < limit)) {
-                  var doc = news[i].articles[j]._doc[0];
-                  doc.description = doc.description.replace('Continue reading...', '');
-                  doc.description = doc.description.replace('<br>', '');
-                  doc.date = moment(doc.date).format('DD/MM/YYYY H:mm').toString();
-                  returnedNews.push(doc);
-                }
-              }
-            }
-          }    
-          returnedNews.sort(function(a, b) {
-            var aDate = moment(a.date, 'DD/MM/YYYY H:mm'),
-                bDate = moment(b.date, 'DD/MM/YYYY H:mm');
-            if(aDate.isAfter(bDate)) { return -1; } 
-            else if (aDate.isBefore(bDate)) { return 1; } 
-            else { return 0; }
-          });
-          res.render('news/list', {
-            user: req.user,
-            news: returnedNews
-          });
-        }
+      res.render('news/list', {
+        user: req.user
       });
     };
     function view(req, res) {
