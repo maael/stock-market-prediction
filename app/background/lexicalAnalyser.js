@@ -2,7 +2,7 @@ var frequency = require('word-frequency'),
     moment = require('moment'),
     Word = require('../models/word'),
     Process = require('../models//process');
-var lexicalAnalyser = function (text) {
+var lexicalAnalyser = function (text, callback) {
     var frequencies = frequency(text),
         words = [];
     // Prcess Setup
@@ -13,28 +13,49 @@ var lexicalAnalyser = function (text) {
     Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
         if(err) { throw err; }
     });
-    for(var word in frequencies) {
-        var wordIndex = words.indexOf(word);
-        if(wordIndex > -1) {
-            words[wordIndex].count += frequencies[word];
-        } else {
-            var newWord = new Word({
-                word: word,
-                count: frequencies[word]
-            });
-            words.push(newWord);
+    Word.find(function(err, words) {
+        function findWord(words, word) {
+            var index = -1;
+            for(var i = 0; i < words.length; i++) {
+                if(words[i].word === word) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
         }
-    }
-    if(words.length > 0) {
-        saveAll(words);
-        function saveAll(words) {
-            var wordToSave = words.pop();
-            Word.update({word: wordToSave.word}, wordToSave.toObject(), {upsert: true}, function(err) {
-                if(err) { throw err; }
-                if(words.length > 0) { saveAll(words); }
-            });
+        for(var word in frequencies) {
+            var wordIndex = findWord(words, word);
+            if(wordIndex > -1) {
+                words[wordIndex].count += frequencies[word];
+            } else {
+                var newWord = new Word({
+                    word: word,
+                    count: frequencies[word]
+                });
+                words.push(newWord);
+            }
         }
-    }
+        if(words.length > 0) {
+            saveAll(words);
+            function saveAll(words) {
+                var wordToSave = words.pop();
+                Word.update({word: wordToSave.word}, wordToSave.toObject(), {upsert: true}, function(err) {
+                    if(err) { throw err; }
+                    if(words.length > 0) { saveAll(words); }
+                    else {
+                        if(typeof(callback) === 'function') {
+                            callback();
+                        }
+                    }
+                });
+            }
+        } else {    
+            if(typeof(callback) === 'function') {
+                callback();
+            }
+        }
+    });
     Process.incrementRuns('lexicalAnalyser', function(err) {
         if(err) { throw err; }
     });
