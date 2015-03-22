@@ -179,7 +179,7 @@ var api = (function() {
       var limit = req.query.limit || 25,
           news = [],
           returnedNews = [];
-      var stream = News.find().sort({date: -1}).limit(10).stream();
+      var stream = News.find().sort({date: -1}).limit(2).stream();
       stream.on('data', function(doc) {
         news.push(doc);
       });
