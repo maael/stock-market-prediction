@@ -1,7 +1,8 @@
 var chai = require('chai'),
     should = chai.should(),
     mongoose = require('mongoose'),
-    dbConfig = require('../config/db');
+    dbConfig = require('../config/db'),
+    request = require('request');
 
 describe('models', function() {
     describe('company', function() {
@@ -34,30 +35,34 @@ describe('models', function() {
 });
 
 describe('Background Processes', function() {
-    var Process = require('../app/models/process');
+    var Process = require('../app/models/process'),
+        Word = require('../app/models/word');
+    before(function(done) {
+        if(mongoose.connection.readyState === 0) {
+            mongoose.connect(dbConfig.testURL);
+        }
+        if(dbConfig.url !== dbConfig.testURL) {
+            Word.remove({}, function() {
+                Process.remove({}, function() {
+                    done(); 
+                });  
+            });
+        } else {
+            done();
+        }
+    });
+    after(function() {
+        mongoose.connection.close();
+    });
     describe('annManager', function() {
 
     });
     describe('lexicalAnalyser', function() {
-        var analyser = require('../app/background/lexicalAnalyser'),
-            Word = require('../app/models/word');
-        before(function(done) {
-            mongoose.connect(dbConfig.testURL);
-            if(dbConfig.url !== dbConfig.testURL) {
-                Word.remove({}, function() {
-                    Process.remove({}, function() {
-                        done(); 
-                    });  
-                });
-            } else {
-                done();
-            }
-        });
+        var analyser = require('../app/background/lexicalAnalyser');
         it('should save a process correctly', function(done) {
             analyser('', function() {
                 Process.findOne({name: 'lexicalAnalyser'}, function(err, process) {
                     should.not.exist(err);
-                    console.log(process.name);
                     process.should.be.an('object');
                     process.name.should.be.a('string');
                     process.lastUpdated.should.be.a('date');
@@ -114,27 +119,6 @@ describe('Background Processes', function() {
         });
         it('should tokenize anagrams differently', function() {
             tokenizer('esTt').toString().should.not.equal(testValue);
-        });
-    });
-});
-
-describe('api', function() {
-    describe('user', function() {
-        describe('put', function() {
-
-        });
-    });
-    describe('company', function() {
-        describe('get', function() {
-
-        });
-        describe('put', function() {
-
-        });
-    });
-    describe('news', function() {
-        describe('get', function() {
-
         });
     });
 });
