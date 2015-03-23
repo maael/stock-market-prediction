@@ -1,5 +1,5 @@
 [{
-    "name"        : "main website",
+    "name"        : "mainwebsite",
     "script"      : "./index.js",
     "instances"   : 1,
     "log_file"    : "./.log/website.log",
@@ -20,9 +20,9 @@
     "name"        : "newsWatcher",
     "script"      : "./app/background/newsWatcher.js",
     "instances"   : 1,
-    "log_file"    : "./.log/quoter.log",
-    "error_file"  : "./.log/quoter.log",
-    "out_file"    : "./.log/quoter.log",
-    "pid_file"    : "./.log/quoter.pid",
+    "log_file"    : "./.log/watcher.log",
+    "error_file"  : "./.log/watcher.log",
+    "out_file"    : "./.log/watcher.log",
+    "pid_file"    : "./.log/watcher.pid",
     "exec_mode"   : "fork"
 }]
