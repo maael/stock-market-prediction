@@ -35,7 +35,7 @@ var properties = [];
                 feed.feedType = watchFeeds[index].type;   
                 parser(watchFeeds[index].feed, function(ParserErr, rss) {
                     if((ParserErr && (ParserErr.code !== 11000)) || !rss) {
-                        console.log(watchFeeds[index].name + ' Failed | ' + ParserErr);
+                        console.log(moment().format('YYYY-MM-DD HH:mm:ss').toString() + ': ' + watchFeeds[index].name + ' Failed | ' + ParserErr);
                     } else {
                         for(var j = 0; j < rss.length; j++) {
                             var article = new NewsArticle(),
