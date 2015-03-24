@@ -33,7 +33,7 @@ module.exports = [
 		name: 'The Huffington Post',
 		feed: 'http://www.huffingtonpost.co.uk/feeds/verticals/world/index.xml',
 		type: 'world',
-		enabled: true
+		enabled: false
 	}, {
 		name: 'Reddit World News',
 		feed: 'http://www.reddit.com/r/worldnews/.rss',

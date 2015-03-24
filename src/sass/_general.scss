@@ -87,14 +87,14 @@ a {
         & > div, & > a{
             cursor: pointer;
             display: block;
-            font-size: 7vmin;
+            font-size: 4vh;
             height: 2em;
             padding: 0.5em 0;
             position: relative;
             text-align: center;
             text-decoration: none;
             p {
-				@media screen and (min-width: 100px) {
+				@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 					display: none;
 				}
                 font-size: 0.3em;
