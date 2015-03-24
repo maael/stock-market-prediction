@@ -76,7 +76,7 @@ get(window.location.origin + '/api/process/get?name=newsWatcher', function(respo
     var process = JSON.parse(response);
     console.log(process)
     if(!process.hasOwnProperty('error')) {
-        document.getElementById('newsLastUpdated').innerHTML = Moment(process.lastRun).fromNow();
+        document.getElementById('newsLastUpdated').innerHTML = moment(process.lastRun).fromNow();
     } else {
         // process query failed
     }
