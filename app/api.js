@@ -6,6 +6,7 @@ var http = require('http'),
     Following = require('./models/following'),
     News = require('./models/news'),
     Network = require('./models/network'),
+    Process = require('./models/process'),
     request = require('request');
 
 
@@ -222,10 +223,27 @@ var api = (function() {
       get: get
     };
   };
+
+  function process() {
+    function get(req, res) {
+      Process.findOne({name: req.query.name}, function(err, process) {
+        if(err) { 
+          res.json({error: err});
+        } else {
+          res.json(process);
+        }
+      })
+    }
+    return {
+      get: get
+    }
+  };
+
   return {
     user: user,
     company: company,
-    news: news
+    news: news,
+    process: process
   };
 })();
 

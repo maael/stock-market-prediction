@@ -71,3 +71,12 @@ get(window.location.origin + '/api/news/get', function(response) {
         newsElement.appendChild(makeError(response.err));
     }
 });
+
+get(window.location.origin + '/api/process/get?name=newsWatcher', function(response) {
+    var process = JSON.parse(response);
+    if(!response.hasOwnProperty('error')) {
+        document.getElementById('newsLastUpdated').innerHTML = Moment(response.lastRun).fromNow();
+    } else {
+        // process query failed
+    }
+});

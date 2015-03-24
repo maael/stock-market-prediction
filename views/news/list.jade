@@ -1,8 +1,12 @@
 extend ../fragments/_auth_header
 append content
-    h4 News
+    div.newsTop
+    	h4 News
+    	span.pull-right Last Updated:
+    		span#newsLastUpdated
     div.news
         div#loading Loading News
             i.icon-arrows-cw
     script(type='text/javascript', src='/javascripts/api.js')  
+    script(type='text/javascript', src='/vendor/moment/moment.min.js') 
     script(type='text/javascript', src='/javascripts/news.js')
