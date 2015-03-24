@@ -11,7 +11,6 @@ var properties = [];
 (function() {
     var count = 0,
         interval = 1800000; // 30 minutes
-    mongoose.connect(dbConfig.url);
     // Prcess Setup
     var process = new Process({
         name: 'newsWatcher',
@@ -22,7 +21,8 @@ var properties = [];
     setInterval(run, interval);
     function run() {
         var operationsDone = 0,
-            operationsBeforeClose = 0;
+            operationsBeforeClose = 0,
+            articles
         function closeCheck() {
             if(operationsDone === operationsBeforeClose) {
                 mongoose.connection.close();
@@ -32,18 +32,24 @@ var properties = [];
         }
         mongoose.connect(dbConfig.url);
         count++;
-        process.lastRun = moment().toISOString();
-        process.runs = count;
-        Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
-            if(err) { throw err; }
-        });
         for(var i = 0; i < watchFeeds.length; i++) (function(index) {
             if(watchFeeds[index].enabled) {
-                var feed = {};
-                feed.name = watchFeeds[index].name;
-                feed.feed = watchFeeds[index].feed;
-                feed.feedType = watchFeeds[index].type;   
+                var feed = watchFeeds[index];
                 parser(watchFeeds[index].feed, function(ParserErr, rss) {
+                    var getKeys = function(obj){
+                       var keys = [];
+                       for(var key in obj){
+                          keys.push(key);
+                       }
+                       return keys;
+                    }
+                    if(typeof(rss[0].meta['rss:pubdate']) !== 'undefined') {
+                        console.log(rss[0].meta['rss:pubdate']['#']);   
+                    } else if (typeof(rss[0].meta['rss:lastbuilddate']) !== 'undefined') {
+                        console.log(rss[0].meta['rss:lastbuilddate']['#']);  
+                    } else {
+                        console.log(rss[0].meta);  
+                    }
                     if((ParserErr && (ParserErr.code !== 11000)) || !rss) {
                         console.log(moment().format('YYYY-MM-DD HH:mm:ss').toString() + ': ' + watchFeeds[index].name + ' Failed | ' + ParserErr);
                     } else {
@@ -61,20 +67,25 @@ var properties = [];
                             article.author = rss[j].author || 'Unknown';
                             article.categories = rss[j].categories;
                             article.feed = feed;
-                            News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
-                                if(err && (err.code !== 11000)) { throw err; }
-                                if(!err) {
-                                    lexicalAnalyser(article.title);
-                                    process.lastUpdated = moment().toISOString();                    
-                                    Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
-                                        if(err) { throw err; }
-                                    });
-                                }
-                            });
+                            //News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
+                            //    if(err && (err.code !== 11000)) { throw err; }
+                            //    if(!err) {
+                            //        lexicalAnalyser(article.title);
+                            //        process.lastUpdated = moment().toISOString();                    
+                            //        Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+                            //            if(err) { throw err; }
+                            //        });
+                            //    }
+                            //});
                         }
                     }
                 });
             }
         })(i);
+        process.lastRun = moment().toISOString();
+        process.runs = count;
+        //Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+            //if(err) { throw err; }
+        //});
     }
 })();
