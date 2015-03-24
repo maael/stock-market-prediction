@@ -24,6 +24,7 @@ var properties = [];
             operationsBeforeClose = 0,
             articlesText = '';
         function closeCheck() {
+            console.log(moment().format('YYYY-MM-DD HH:mm:ss').toString() + ': ' + 'Checking to close newsWatcher, ' + operationsDone + '/' + operationsBeforeClose + 'operations done');
             if(operationsDone === operationsBeforeClose) {
                 if(articlesText.length > 0) {
                     articlesText = articlesText.substr(0, articlesText.length-1);
@@ -37,7 +38,9 @@ var properties = [];
                 setTimeout(function() { closeCheck() }, 1000);
             }
         }
-        mongoose.connect(dbConfig.url);
+        if(mongoose.connection.readyState === 0) {
+            mongoose.connect(dbConfig.url);
+        }
         count++;
         for(var i = 0; i < watchFeeds.length; i++) (function(index) {
             if(watchFeeds[index].enabled) {
