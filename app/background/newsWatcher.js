@@ -50,16 +50,16 @@ var properties = [];
                        }
                        return keys;
                     }
-                    if(typeof(rss[0].meta['rss:pubdate']) !== 'undefined') {
-                        console.log(rss[0].meta['rss:pubdate']['#']);   
-                    } else if (typeof(rss[0].meta['rss:lastbuilddate']) !== 'undefined') {
-                        console.log(rss[0].meta['rss:lastbuilddate']['#']);  
-                    } else {
-                        console.log(rss[0].meta);  
-                    }
                     if((ParserErr && (ParserErr.code !== 11000)) || !rss) {
                         console.log(moment().format('YYYY-MM-DD HH:mm:ss').toString() + ': ' + watchFeeds[index].name + ' Failed | ' + ParserErr);
                     } else {
+                        /*if(typeof(rss[0].meta['rss:pubdate']) !== 'undefined') {
+                            console.log(rss[0].meta['rss:pubdate']['#']);   
+                        } else if (typeof(rss[0].meta['rss:lastbuilddate']) !== 'undefined') {
+                            console.log(rss[0].meta['rss:lastbuilddate']['#']);  
+                        } else {
+                            console.log(rss[0].meta);  
+                        }*/
                         for(var j = 0; j < rss.length; j++) {
                             var article = new NewsArticle(),
                                 articleDate = rss[j].date || rss[j].pubdate || rss[j].pubDate;
@@ -83,10 +83,7 @@ var properties = [];
                                 if(!err) {
                                     articlesText += article.title + ' ';
                                     operationsDone++;
-                                    process.lastUpdated = moment().toISOString();                    
-                                    Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
-                                        if(err) { throw err; }
-                                    });
+                                    process.lastUpdated = moment().toISOString();
                                 }
                             });
                         }
