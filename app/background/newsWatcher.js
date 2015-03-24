@@ -21,6 +21,16 @@ var properties = [];
     run();
     setInterval(run, interval);
     function run() {
+        var operationsDone = 0,
+            operationsBeforeClose = 0;
+        function closeCheck() {
+            if(operationsDone === operationsBeforeClose) {
+                mongoose.connection.close();
+            } else {
+                setTimeout(function() { closeCheck() }, 1000);
+            }
+        }
+        mongoose.connect(dbConfig.url);
         count++;
         process.lastRun = moment().toISOString();
         process.runs = count;
