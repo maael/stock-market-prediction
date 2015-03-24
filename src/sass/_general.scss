@@ -16,6 +16,14 @@ a {
     text-decoration: none;
 }
 
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
 .main-header {
     background-color: $green;
     color: $textOnGreen;
