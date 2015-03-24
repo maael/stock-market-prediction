@@ -50,6 +50,9 @@ module.exports = function(app, passport) {
     app.get('/api/news/get', isAuthedAPI, function(req, res) {
         api.news().get(req, res);
     });
+    app.get('/api/process/get', isAuthedAPI, function(req, res) {
+        api.process().get(req, res);
+    });
     /*
     * User Routing
     */
