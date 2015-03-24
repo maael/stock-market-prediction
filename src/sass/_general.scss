@@ -79,15 +79,20 @@ a {
         & > div, & > a{
             cursor: pointer;
             display: block;
-            font-size: 3em;
+            font-size: 7vmin;
             height: 2em;
             padding: 0.5em 0;
             position: relative;
             text-align: center;
             text-decoration: none;
             p {
+				@media screen and (min-width: 100px) {
+					display: none;
+				}
                 font-size: 0.3em;
                 margin-top: 0.5em;
+				overflow: hidden;
+				text-overflow: ellipsis;
             }
         }
         & > *:hover {
@@ -98,9 +103,12 @@ a {
         }
         .menu-option {
             left: 50%;
+			overflow: hidden;
             position: absolute;
+			text-overflow: ellipsis;
             top: 50%;
             transform: translate(-50%, -50%);
+			width: 100%;
         }
     }
 }
