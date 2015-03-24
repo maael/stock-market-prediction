@@ -22,10 +22,17 @@ var properties = [];
     function run() {
         var operationsDone = 0,
             operationsBeforeClose = 0,
-            articles
+            articlesText = '';
         function closeCheck() {
             if(operationsDone === operationsBeforeClose) {
-                mongoose.connection.close();
+                if(articlesText.length > 0) {
+                    articlesText = articlesText.substr(0, articlesText.length-1);
+                    lexicalAnalyser(articlesText, function() {
+                        mongoose.connection.close();
+                    });
+                } else {
+                    mongoose.connection.close();
+                }
             } else {
                 setTimeout(function() { closeCheck() }, 1000);
             }
@@ -56,7 +63,7 @@ var properties = [];
                         for(var j = 0; j < rss.length; j++) {
                             var article = new NewsArticle(),
                                 articleDate = rss[j].date || rss[j].pubdate || rss[j].pubDate;
-                                newsDay = moment(rss[j].date).set({'hour': 0, 'minute': 0, 'second': 0, 'millisecond': 0}).toISOString().valueOf();
+                                newsDay = moment(rss[j].date).startOf('day').toISOString().valueOf();
                             article.guid = rss[j].guid;
                             article.title = rss[j].title;
                             article.description = rss[j].description || rss[j].summary;
@@ -67,16 +74,21 @@ var properties = [];
                             article.author = rss[j].author || 'Unknown';
                             article.categories = rss[j].categories;
                             article.feed = feed;
-                            //News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
-                            //    if(err && (err.code !== 11000)) { throw err; }
-                            //    if(!err) {
-                            //        lexicalAnalyser(article.title);
-                            //        process.lastUpdated = moment().toISOString();                    
-                            //        Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
-                            //            if(err) { throw err; }
-                            //        });
-                            //    }
-                            //});
+                            operationsBeforeClose++;
+                            News.update({'date': newsDay}, { $addToSet: {articles: [article]} }, { upsert: true }, function(err) {
+                                if(err && (err.code !== 11000)) { throw err; }
+                                if(err && err.code === 11000) {
+                                    operationsBeforeClose--;
+                                }
+                                if(!err) {
+                                    articlesText += article.title + ' ';
+                                    operationsDone++;
+                                    process.lastUpdated = moment().toISOString();                    
+                                    Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+                                        if(err) { throw err; }
+                                    });
+                                }
+                            });
                         }
                     }
                 });
@@ -84,8 +96,8 @@ var properties = [];
         })(i);
         process.lastRun = moment().toISOString();
         process.runs = count;
-        //Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
-            //if(err) { throw err; }
-        //});
+        Process.update({name: process.name}, process.toObject(), {upsert: true}, function(err) {
+            if(err) { throw err; }
+        });
     }
 })();
