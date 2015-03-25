@@ -33,7 +33,7 @@ var lexicalAnalyser = function (text, callback) {
                 var newWord = new Word({
                     word: word,
                     count: frequencies[word],
-                    token: tokenizer(word);
+                    token: tokenizer(word)
                 });
                 words.push(newWord);
             }
