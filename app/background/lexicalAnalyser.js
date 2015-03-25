@@ -32,7 +32,7 @@ var lexicalAnalyser = function (text, callback) {
             } else {
                 var newWord = new Word({
                     word: word,
-                    count: frequencies[word]
+                    count: frequencies[word],
                     token: tokenizer(word);
                 });
                 words.push(newWord);
