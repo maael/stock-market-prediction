@@ -39,7 +39,7 @@
     "moment": "^2.8.4",
     "mongoose": "^3.8.23",
     "morgan": "^1.5.1",
-    "node-ann": "^0.2.2",
+    "node-ann": "^0.3.0",
     "parse-rss": "^1.0.3",
     "passport": "^0.2.1",
     "passport-facebook": "^1.0.3",
