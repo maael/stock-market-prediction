@@ -1,7 +1,8 @@
 var frequency = require('word-frequency'),
     moment = require('moment'),
     Word = require('../models/word'),
-    Process = require('../models//process');
+    Process = require('../models//process'),
+    tokenizer = require('./tokenizer');
 var lexicalAnalyser = function (text, callback) {
     var frequencies = frequency(text),
         words = [];
@@ -32,6 +33,7 @@ var lexicalAnalyser = function (text, callback) {
                 var newWord = new Word({
                     word: word,
                     count: frequencies[word]
+                    token: tokenizer(word);
                 });
                 words.push(newWord);
             }

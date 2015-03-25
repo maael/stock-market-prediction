@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var wordSchema = mongoose.Schema({
     word: {type: String, unique: true},
-    count: Number
+    count: Number,
+    token: String
 }, {_id: false});
 
 /* Frequency is per mille */
