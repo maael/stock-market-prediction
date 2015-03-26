@@ -2,7 +2,9 @@ var News = require('../models/news'),
     tokenizer = require('../background/tokenizer'),
     DayTokens = require('../models/dayTokens'),
     moment = require('moment'),
-    lexicalAnalyser = require('../background/lexicalAnalyser');
+    frequency = require('word-frequency'),
+    Word = require('../models/word'),
+    lexicalAnalyser = require('./newLexical');
 var setupTokensAndWords = function(callback) {
     var operationsDone = 0,
         operationsBeforeClose = 0,
@@ -10,9 +12,7 @@ var setupTokensAndWords = function(callback) {
     function closeCheck() {
         if(operationsDone === operationsBeforeClose) {
             console.log('Finished setting up tokens and words');
-            console.log('Start Lexical Analyse');
             lexicalAnalyser(articleTitles, function() {
-                console.log('Finished Lexical Analyse');
                 callback();
             });
         } else {

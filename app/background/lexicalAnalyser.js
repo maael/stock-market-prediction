@@ -4,7 +4,6 @@ var frequency = require('word-frequency'),
     Process = require('../models//process'),
     tokenizer = require('./tokenizer');
 var lexicalAnalyser = function (text, lexicalCallback) {
-    console.log(text);
     var frequencies = frequency(text),
         words = [];
     // Prcess Setup
