@@ -13,14 +13,12 @@ var newLexical = function(text, callback) {
         }
     }
     var frequencies = frequency(text);
-    console.log(frequencies);
     operationsBeforeClose = Object.keys(frequencies).length;
     for(var word in frequencies) {
         var newWord = new Word();
         newWord.word = word;
         newWord.count = frequencies[word];
         newWord.token = tokenizer(word);
-        console.log(newWord);
         newWord.save(function(err) {
             if(err) { throw err; }
             operationsDone += 1;

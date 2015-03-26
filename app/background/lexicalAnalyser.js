@@ -42,7 +42,7 @@ var lexicalAnalyser = function (text, lexicalCallback) {
             saveAll(words);
             function saveAll(words) {
                 var wordToSave = words.pop();
-                console.log('saving ' + wordToSave);
+                delete wordToSave._id;
                 Word.update({word: wordToSave.word}, wordToSave.toObject(), {upsert: true}, function(err) {
                     if(err) { throw err; }
                     if(words.length > 0) { saveAll(words); }
