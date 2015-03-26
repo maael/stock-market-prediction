@@ -3,12 +3,13 @@ var News = require('../models/news'),
     DayTokens = require('../models/dayTokens'),
     moment = require('moment'),
     lexicalAnalyser = require('../background/lexicalAnalyser');
-var getNewsTrainingExamples = function(callback) {
+var setupTokensAndWords = function(callback) {
     var operationsDone = 0,
         operationsBeforeClose = 0,
         articleTitles = '';
     function closeCheck() {
         if(operationsDone === operationsBeforeClose) {
+            console.log('Finished setting up tokens and words')
             lexicalAnalyser(articleTitles, function() {
                 callback();
             })
@@ -61,7 +62,8 @@ var getNewsTrainingExamples = function(callback) {
             })(i);
         })
     }
+    console.log('Setting up tokens and words')
     getArticles();
 }
 
-module.exports = getNewsTrainingExamples;
+module.exports = setupTokensAndWords;

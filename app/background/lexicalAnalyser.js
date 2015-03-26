@@ -6,6 +6,7 @@ var frequency = require('word-frequency'),
 var lexicalAnalyser = function (text, callback) {
     var frequencies = frequency(text),
         words = [];
+    console.log('Start Lexical Analyse');
     // Prcess Setup
     var process = new Process({
         name: 'lexicalAnalyser',
@@ -47,6 +48,7 @@ var lexicalAnalyser = function (text, callback) {
                     if(words.length > 0) { saveAll(words); }
                     else {
                         if(typeof(callback) === 'function') {
+                            console.log('Finished Lexical Analyse');
                             callback();
                         }
                     }
@@ -54,6 +56,7 @@ var lexicalAnalyser = function (text, callback) {
             }
         } else {    
             if(typeof(callback) === 'function') {
+                console.log('Finished Lexical Analyse');
                 callback();
             }
         }
