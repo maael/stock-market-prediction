@@ -41,7 +41,7 @@ var getNewsTrainingExamples = function(callback) {
                 .on('data', function(day) {
                     var articles = day.articles;
                     for(var j = 0; j < articles.length; j++) {
-                        articleTitles += + articles[j]._doc['0'].title + ' ';
+                        articleTitles += articles[j]._doc['0'].title + ' ';
                         var words = stripText(articles[j]._doc['0'].title.toLowerCase()).split(' ');
                         for(var k = 0; k < words.length; k++) {
                             tokens.push(tokenizer(words[k]));
