@@ -5,7 +5,11 @@ var networkSchema = mongoose.Schema({
     lastTrained: {type: Date, default: new Date},
     network: {
         layers: [],
-        perceptrons: [],
+        perceptrons: [{
+            options: mongoose.Schema.Types.Mixed,
+            inputs: [],
+            outputs: []
+        }],
         options: mongoose.Schema.Types.Mixed,
         weightMatrix: {type: mongoose.Schema.Types.Mixed, default: {}},
         activations: {type: mongoose.Schema.Types.Mixed, default: {}},
