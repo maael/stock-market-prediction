@@ -30,7 +30,9 @@ var cluster = require('cluster'),
                 setTimeout(function() { closeCheck() }, 1000);
             }
         }
-        mongoose.connect(dbConfig.url);
+        if(mongoose.connection.readyState === 0) {
+            mongoose.connect(dbConfig.url);
+        }
         var companyStream,
             networkStream = Network.find().stream(),
             networkSymbols = [],
