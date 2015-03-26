@@ -4,7 +4,7 @@ var wordSchema = mongoose.Schema({
     word: {type: String, unique: true},
     count: Number,
     token: String
-}, {_id: false});
+});
 
 /* Frequency is per mille */
 wordSchema.virtual('frequency').get(function() {
