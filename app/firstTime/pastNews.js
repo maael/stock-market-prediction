@@ -36,8 +36,9 @@ var setupTokensAndWords = function(callback) {
         });
     }
     function getArticles() {
+        console.log('Setting up tokens and words');
         getDates(function(dates) {
-                operationsBeforeClose = dates.length;
+            operationsBeforeClose = dates.length;
             for(var i = 0; i < dates.length; i++) (function(i) {
                 var tokens = [];
                 News.findOne({date: dates[i]}).stream()
@@ -56,15 +57,14 @@ var setupTokensAndWords = function(callback) {
                     });
                 })
                 .on('close', function() {
-                    closeCheck();
                 })
                 .on('error', function(err) {
                     if(err) { throw err; }
                 });
             })(i);
-        })
+            closeCheck();
+        });
     }
-    console.log('Setting up tokens and words')
     getArticles();
 }
 
