@@ -13,7 +13,7 @@ var cluster = require('cluster'),
             name: 'annManager',
             started: moment().toISOString()
         });
-    firstTimeSetUp(run());
+    firstTimeSetUp(run);
     function timeUntilEndOfDay() {
         var now = moment(),
             endOfDay = moment().endOf('day');

@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     DayTokens = require('../models/dayTokens');
 
 var firstTimeSetup = function(callback) {
-    function setUp(callback) {
+    function setUp() {
         firstTimeNews(function() {
             mongoose.connection.close();
             callback();
@@ -16,11 +16,11 @@ var firstTimeSetup = function(callback) {
     }
     Word.count(function(err, wordCount) {
         if(wordCount === 0) {
-            setUp(callback);
+            setUp();
         } else {
             DayTokens.count(function(tokenErr, daysCount) {
                 if(daysCount === 0) {
-                    setUp(callback);
+                    setUp();
                 }
                 else {
                     mongoose.connection.close();
