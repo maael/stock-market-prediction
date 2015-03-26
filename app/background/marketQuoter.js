@@ -37,9 +37,6 @@ var request = require('request'),
                 getQuote(company, function(company, quote) {
                     if(!quoteExists(quote, company.quotes)) {
                         company.quotes.push(quote);
-                        if(company.quotes.length > 50) {
-                            company.quotes.splice(-(company.quotes.length - 50), (company.quotes.length - 50));
-                        }
                         company.save(function(err, company) {
                             if(err) { throw err; }
                             process.lastUpdated = moment().toISOString();                    
