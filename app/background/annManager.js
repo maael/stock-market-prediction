@@ -5,14 +5,15 @@ var cluster = require('cluster'),
     netConfig = require('../network/configuration'),
     Network = require('../models/network'),
     Company = require('../models/company'),
-    Process = require('../models/process');
+    Process = require('../models/process'),
+    firstTimeSetUp = require('../firstTime/setup');
 
 (function() {
-    var interval = 1800000,
-        process = new Process({
+    var process = new Process({
             name: 'annManager',
             started: moment().toISOString()
         });
+    firstTimeSetUp();
     run();
     function timeUntilEndOfDay() {
         var now = moment(),
@@ -47,13 +48,16 @@ var cluster = require('cluster'),
                     //Initialise and save new network
                     operationsBeforeClose += 1;
                     newSymbolNetwork = netConfig.generate();
-                    console.log(newSymbolNetwork.getLayer(0));
+                    var networkInfo = newSymbolNetwork.getNetwork();
                     newNetwork = new Network({
                         symbol: doc.symbol,
                         network: {
-                            inputs: newSymbolNetwork.getLayer(0),
-                            hiddens: newSymbolNetwork.getLayer(1),
-                            outputs: newSymbolNetwork.getLayer(2)
+                            options: networkInfo.options,
+                            layers: networkInfo.layers,
+                            perceptrons: networkInfo.perceptrons,
+                            weightMatrix : networkInfo.weightMatrix,
+                            activations: networkInfo.activations,
+                            deltas: networkInfo.deltas
                         }
                     });
                     newNetwork.save(function(err) {

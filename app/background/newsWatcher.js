@@ -6,7 +6,9 @@ var parser = require('parse-rss'),
     News = require('../models/news'),
     NewsArticle = require('../models/newsArticle'),
     Process = require('../models/process'),
-    lexicalAnalyser = require('./lexicalAnalyser');
+    lexicalAnalyser = require('./lexicalAnalyser'),
+    tokenizer = require('./tokenizer'),
+    DayTokens = require('../models/dayTokens');
 var properties = [];
 (function() {
     var count = 0,
@@ -38,6 +40,20 @@ var properties = [];
                 setTimeout(function() { closeCheck() }, 1000);
             }
         }
+        function saveTokens(date, text, callback) {
+            var tokens = [];
+            function stripText(text) {
+                return text.replace(/<[^>]+>|[!.?,;:'"-]/g,'').replace(/\r?\n|\r|\s+|\t/g, ' ').trim();
+            }
+            var words = stripText(text.toLowerCase()).split(' ');
+            for(var k = 0; k < words.length; k++) {
+                tokens.push(tokenizer(words[k]));
+            }
+            DayTokens.update({'date': date}, { $push: {tokens: { $each: tokens}}}, { upsert: true }, function(err) {
+                if(err) { throw err; }
+                callback();
+            });
+        }
         if(mongoose.connection.readyState === 0) {
             mongoose.connect(dbConfig.url);
         }
@@ -56,13 +72,6 @@ var properties = [];
                     if((ParserErr && (ParserErr.code !== 11000)) || !rss) {
                         console.log(moment().format('YYYY-MM-DD HH:mm:ss').toString() + ': ' + watchFeeds[index].name + ' Failed | ' + ParserErr);
                     } else {
-                        /*if(typeof(rss[0].meta['rss:pubdate']) !== 'undefined') {
-                            console.log(rss[0].meta['rss:pubdate']['#']);   
-                        } else if (typeof(rss[0].meta['rss:lastbuilddate']) !== 'undefined') {
-                            console.log(rss[0].meta['rss:lastbuilddate']['#']);  
-                        } else {
-                            console.log(rss[0].meta);  
-                        }*/
                         for(var j = 0; j < rss.length; j++) {
                             var article = new NewsArticle(),
                                 articleDate = rss[j].date || rss[j].pubdate || rss[j].pubDate;
@@ -85,7 +94,9 @@ var properties = [];
                                 }
                                 if(!err) {
                                     articlesText += article.title + ' ';
-                                    operationsDone++;
+                                    saveTokens(article.date, article.title, function() {
+                                        operationsDone++;
+                                    });
                                     process.lastUpdated = moment().toISOString();
                                 }
                             });

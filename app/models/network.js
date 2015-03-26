@@ -4,11 +4,10 @@ var networkSchema = mongoose.Schema({
     symbol: String,
     lastTrained: {type: Date, default: new Date},
     network: {
-        inputs: {type: [], default: []},
-        hiddens: {type: [], default: []},
-        outputs: {type: [], default: []},
+        layers: [],
+        perceptrons: [],
         options: mongoose.Schema.Types.Mixed,
-        weightings: {type: mongoose.Schema.Types.Mixed, default: {}},
+        weightMatrix: {type: mongoose.Schema.Types.Mixed, default: {}},
         activations: {type: mongoose.Schema.Types.Mixed, default: {}},
         deltas: {type: mongoose.Schema.Types.Mixed, default: {}},
         last: {
