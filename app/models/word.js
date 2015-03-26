@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var wordSchema = mongoose.Schema({
-    word: {type: String, unique: true},
+    word: {type: String, unique: true, id: true},
     count: Number,
     token: String
 });
