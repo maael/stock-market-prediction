@@ -53,7 +53,7 @@ var cluster = require('cluster'),
                     newNetwork = new Network({
                         symbol: doc.symbol,
                         network: {
-                            options: networkInfo.options,
+                            netOptions: networkInfo.options,
                             layers: networkInfo.layers,
                             perceptrons: networkInfo.perceptrons,
                             weightMatrix : networkInfo.weightMatrix,
