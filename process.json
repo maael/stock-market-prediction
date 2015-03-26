@@ -25,4 +25,13 @@
     "out_file"    : "./.log/watcher.log",
     "pid_file"    : "./.log/watcher.pid",
     "exec_mode"   : "fork"
+}, {
+    "name"        : "annManager",
+    "script"      : "./app/background/annManager.js",
+    "instances"   : 1,
+    "log_file"    : "./.log/manager.log",
+    "error_file"  : "./.log/manager.log",
+    "out_file"    : "./.log/manager.log",
+    "pid_file"    : "./.log/manager.pid",
+    "exec_mode"   : "fork"
 }]

@@ -47,6 +47,7 @@ var cluster = require('cluster'),
             companyStream.on('data', function(doc) {
                 if(networkSymbols.indexOf(doc.symbol) === -1) {
                     //Initialise and save new network
+                    console.log('Creating Network for ' + doc.symbol);
                     operationsBeforeClose += 1;
                     newSymbolNetwork = netConfig.generate();
                     var networkInfo = newSymbolNetwork.getNetwork();

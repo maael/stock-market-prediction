@@ -6,8 +6,10 @@ var mongoose = require('mongoose'),
 
 var firstTimeSetup = function(callback) {
     function setUp() {
+        console.log('Running First Time Setup');
         firstTimeNews(function() {
             mongoose.connection.close();
+            console.log('Finished First Time Setup');
             callback();
         });
     }
