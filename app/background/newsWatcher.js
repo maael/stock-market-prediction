@@ -49,7 +49,7 @@ var properties = [];
             for(var k = 0; k < words.length; k++) {
                 tokens.push(tokenizer(words[k]));
             }
-            DayTokens.update({'date': date}, { $push: {tokens: { $each: tokens}}}, { upsert: true }, function(err) {
+            DayTokens.update({'date': date}, { $pushAll: {tokens: tokens}}, { upsert: true }, function(err) {
                 if(err) { throw err; }
                 callback();
             });

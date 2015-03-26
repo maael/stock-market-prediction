@@ -46,7 +46,7 @@ var getNewsTrainingExamples = function(callback) {
                             tokens.push(tokenizer(words[k]));
                         }
                     }
-                    DayTokens.update({'date': dates[i]}, { $push: {tokens: { $each: tokens}}}, { upsert: true }, function(err) {
+                    DayTokens.update({'date': dates[i]}, { $pushAll : {tokens: tokens}}, { upsert: true }, function(err) {
                         if(err) { throw err; }
                         operationsDone += 1;
                     });
