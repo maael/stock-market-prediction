@@ -1,6 +1,7 @@
 var News = require('../models/news'),
     tokenizer = require('../background/tokenizer'),
     DayTokens = require('../models/dayTokens'),
+    moment = require('moment'),
     lexicalAnalyser = require('../background/lexicalAnalyser');
 var getNewsTrainingExamples = function(callback) {
     var operationsDone = 0,
@@ -46,7 +47,7 @@ var getNewsTrainingExamples = function(callback) {
                             tokens.push(tokenizer(words[k]));
                         }
                     }
-                    DayTokens.update({'date': dates[i]}, { $pushAll : {tokens: tokens}}, { upsert: true }, function(err) {
+                    DayTokens.update({'date': moment(dates[i]).startOf('day').toISOString()}, { $pushAll : {tokens: tokens}}, { upsert: true }, function(err) {
                         if(err) { throw err; }
                         operationsDone += 1;
                     });

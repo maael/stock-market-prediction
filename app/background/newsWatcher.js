@@ -42,6 +42,7 @@ var properties = [];
         }
         function saveTokens(date, text, callback) {
             var tokens = [];
+            date = moment(date).startOf('day').toISOString();
             function stripText(text) {
                 return text.replace(/<[^>]+>|[!.?,;:'"-]/g,'').replace(/\r?\n|\r|\s+|\t/g, ' ').trim();
             }
