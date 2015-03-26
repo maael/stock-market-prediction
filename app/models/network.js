@@ -6,11 +6,11 @@ var networkSchema = mongoose.Schema({
     network: {
         layers: [],
         perceptrons: [{
-            options: mongoose.Schema.Types.Mixed,
+            perOptions: mongoose.Schema.Types.Mixed,
             inputs: [],
             outputs: []
         }],
-        options: mongoose.Schema.Types.Mixed,
+        netOptions: mongoose.Schema.Types.Mixed,
         weightMatrix: {type: mongoose.Schema.Types.Mixed, default: {}},
         activations: {type: mongoose.Schema.Types.Mixed, default: {}},
         deltas: {type: mongoose.Schema.Types.Mixed, default: {}},
