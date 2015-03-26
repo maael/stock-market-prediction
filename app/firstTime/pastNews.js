@@ -9,10 +9,12 @@ var setupTokensAndWords = function(callback) {
         articleTitles = '';
     function closeCheck() {
         if(operationsDone === operationsBeforeClose) {
-            console.log('Finished setting up tokens and words')
+            console.log('Finished setting up tokens and words');
+            console.log('Start Lexical Analyse');
             lexicalAnalyser(articleTitles, function() {
+                console.log('Finished Lexical Analyse');
                 callback();
-            })
+            });
         } else {
             setTimeout(function() { closeCheck() }, 1000);
         }
