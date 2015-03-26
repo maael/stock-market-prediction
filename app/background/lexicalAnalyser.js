@@ -3,7 +3,8 @@ var frequency = require('word-frequency'),
     Word = require('../models/word'),
     Process = require('../models//process'),
     tokenizer = require('./tokenizer');
-var lexicalAnalyser = function (text, callback) {
+var lexicalAnalyser = function (text, lexicalCallback) {
+    console.log(text);
     var frequencies = frequency(text),
         words = [];
     // Prcess Setup
@@ -47,15 +48,15 @@ var lexicalAnalyser = function (text, callback) {
                     if(err) { throw err; }
                     if(words.length > 0) { saveAll(words); }
                     else {
-                        if(typeof(callback) === 'function') {
-                            callback();
+                        if(typeof(lexicalCallback) === 'function') {
+                            lexicalCallback();
                         }
                     }
                 });
             }
         } else {    
-            if(typeof(callback) === 'function') {
-                callback();
+            if(typeof(lexicalCallback) === 'function') {
+                lexicalCallback();
             }
         }
     });

@@ -4,13 +4,13 @@ var mongoose = require('mongoose'),
     Word = require('../models/word'),
     DayTokens = require('../models/dayTokens');
 
-var firstTimeSetup = function(callback) {
+var firstTimeSetup = function(setupCallback) {
     function setUp() {
         console.log('Running First Time Setup');
         firstTimeNews(function() {
             mongoose.connection.close();
             console.log('Finished First Time Setup');
-            callback();
+            setupCallback();
         });
     }
     if(mongoose.connection.readyState === 0) {
@@ -26,7 +26,7 @@ var firstTimeSetup = function(callback) {
                 }
                 else {
                     mongoose.connection.close();
-                    callback();
+                    setupCallback();
                 }
             });
         }
