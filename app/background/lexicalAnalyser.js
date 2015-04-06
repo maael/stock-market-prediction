@@ -35,15 +35,17 @@ var lexicalAnalyser = function (text, lexicalCallback) {
                     count: frequencies[word],
                     token: tokenizer(word)
                 });
+                delete newWord._id;
                 words.push(newWord);
             }
         }
         if(words.length > 0) {
             saveAll(words);
             function saveAll(words) {
-                var wordToSave = words.pop();
-                delete wordToSave._id;
-                Word.update({word: wordToSave.word}, wordToSave.toObject(), {upsert: true}, function(err) {
+                var wordToSave = words.pop(),
+                    wordObject = wordToSave.toObject();
+                delete wordObject._id;
+                Word.update({word: wordToSave.word}, wordObject, {upsert: true}, function(err) {
                     if(err) { throw err; }
                     if(words.length > 0) { saveAll(words); }
                     else {
