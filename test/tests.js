@@ -59,19 +59,6 @@ describe('Background Processes', function() {
     });
     describe('lexicalAnalyser', function() {
         var analyser = require('../app/background/lexicalAnalyser');
-        it('should save a process correctly', function(done) {
-            analyser('', function() {
-                Process.findOne({name: 'lexicalAnalyser'}, function(err, process) {
-                    should.not.exist(err);
-                    process.should.be.an('object');
-                    process.name.should.be.a('string');
-                    process.lastUpdated.should.be.a('date');
-                    process.lastRun.should.be.a('date');
-                    process.started.should.be.a('date');
-                    done();
-                });
-            });
-        });
         it('should add words from new texts correctly', function(done) {
             analyser('this is a test', function() {
                 Word.find(function(err, words) {
@@ -99,6 +86,19 @@ describe('Background Processes', function() {
                             words[i].count.should.equal(1);
                         }
                     }
+                    done();
+                });
+            });
+        });
+        it('should save a process correctly', function(done) {
+            analyser('', function() {
+                Process.findOne({name: 'lexicalAnalyser'}, function(err, process) {
+                    should.not.exist(err);
+                    process.should.be.an('object');
+                    process.name.should.be.a('string');
+                    process.lastUpdated.should.be.a('date');
+                    process.lastRun.should.be.a('date');
+                    process.started.should.be.a('date');
                     done();
                 });
             });
