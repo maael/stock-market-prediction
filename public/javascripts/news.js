@@ -1,4 +1,4 @@
-get(window.location.origin + '/api/news/get', function(response) {
+get(window.location.origin + '/api/news', function(response) {
     var news = JSON.parse(response),
         newsElement = document.getElementsByClassName('news')[0],
         loadingElement = document.getElementById('loading');
@@ -72,7 +72,7 @@ get(window.location.origin + '/api/news/get', function(response) {
     }
 });
 
-get(window.location.origin + '/api/process/get?name=newsWatcher', function(response) {
+get(window.location.origin + '/api/process?name=newsWatcher', function(response) {
     var process = JSON.parse(response);
     console.log(process)
     if(!process.hasOwnProperty('error')) {

@@ -1,4 +1,4 @@
-get(window.location.origin + '/api/company/get?symbol=' + encodeURIComponent(document.body.dataset.symbol), function(response) {
+get(window.location.origin + '/api/company?symbol=' + encodeURIComponent(document.body.dataset.symbol), function(response) {
     var historicalData = JSON.parse(response)[0].historicalData;
     var columns = [];
     for(var i = 0; i < historicalData.length; i++) {

@@ -44,13 +44,13 @@ module.exports = function(app, passport) {
     app.post('/api/user/company', isAuthedAPI, function(req, res) {
         api.user().company().put(req, res);
     });
-    app.get('/api/company/get', isAuthedAPI, function(req, res) {
+    app.get('/api/company', isAuthedAPI, function(req, res) {
         api.company().get(req, res);
     });
-    app.get('/api/news/get', isAuthedAPI, function(req, res) {
+    app.get('/api/news', isAuthedAPI, function(req, res) {
         api.news().get(req, res);
     });
-    app.get('/api/process/get', isAuthedAPI, function(req, res) {
+    app.get('/api/process', isAuthedAPI, function(req, res) {
         api.process().get(req, res);
     });
     /*
