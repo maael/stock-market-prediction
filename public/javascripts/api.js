@@ -1,3 +1,12 @@
+/**
+ * @module clientAPI
+ */
+/**
+ * Makes POST request to specified path with parameters
+ * @param {string} path - path to make request to
+ * @param {object} params - parameter object added to request string in key=value format
+ * @param {string} method - method to use for request, defaults to "post"
+ */
 function post(path, params, method) {
   method = method || "post"; // Set method to post by default if not specified.
   function ajaxRequest(){
@@ -36,7 +45,11 @@ function post(path, params, method) {
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   request.send(parameters);
 }
-
+/**
+ * Makes GET request to specified url
+ * @param {string} url - url to make request to
+ * @param {function} callback - function to perform on response
+ */
 function get(url, callback) {
   var xmlHttp = new XMLHttpRequest();
   xmlHttp.onload = function() {
@@ -45,7 +58,11 @@ function get(url, callback) {
   xmlHttp.open( "GET", url, false );
   xmlHttp.send( null );
 }
-
+/**
+ * Extracts parameters from url string
+ * @param {string} val - name of the parameter to extract
+ * @returns {string}
+ */
 function parse(val) {
   var result = "Not found",
       tmp = [];

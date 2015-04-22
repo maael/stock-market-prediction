@@ -1,7 +1,16 @@
+/**
+ * Loads news via a request to the API
+ * @requires module:clientAPI
+ */
 get(window.location.origin + '/api/news', function(response) {
     var news = JSON.parse(response),
         newsElement = document.getElementsByClassName('news')[0],
         loadingElement = document.getElementById('loading');
+    /**
+     * Construct and fill a div element from a news article model instance
+     * @param {object} article - news article to create element for
+     * @returns {object} DOMElement - filled out DOMElement structure for news article
+     */
     function makeArticle(article) {
         var articleDiv = document.createElement('div'),
             dateDiv = document.createElement('div'),
@@ -45,6 +54,11 @@ get(window.location.origin + '/api/news', function(response) {
         
         return articleDiv;   
     }
+    /**
+     * Construct an error element
+     * @param {string} error - error text to display
+     * @returns {object} DOMElement - filled out DOMElement structure for error
+     */
     function makeError(error) {
         var errorDiv = document.createElement('div'),
             errorIcon = document.createElement('i'),
@@ -71,7 +85,9 @@ get(window.location.origin + '/api/news', function(response) {
         newsElement.appendChild(makeError(response.err));
     }
 });
-
+/**
+ * API request to get newsWatcher process information, and display it on the page
+ */
 get(window.location.origin + '/api/process?name=newsWatcher', function(response) {
     var process = JSON.parse(response);
     console.log(process)

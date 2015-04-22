@@ -1,3 +1,7 @@
+/**
+ * Gets company information and details via the API
+ * @requires module:clientAPI
+ */
 get(window.location.origin + '/api/company?symbol=' + encodeURIComponent(document.body.dataset.symbol), function(response) {
     var historicalData = JSON.parse(response)[0].historicalData;
     var columns = [];

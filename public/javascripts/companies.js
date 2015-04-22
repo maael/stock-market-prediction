@@ -1,5 +1,9 @@
 $(function() {
     /* Autofocus relying on markitondemand api */
+    /**
+     * Autocomplete for companies search
+     * @function autocomplete
+     */
     $("#symbolsearch")
     .focus()
     .autocomplete({
@@ -39,6 +43,11 @@ $(function() {
         }
     });
     /* Remove companies before adding them */
+    /**
+     * Confirm company selection and save choice via the API
+     * @function saveCompany
+     * @requires module:clientAPI
+     */
     $('body').on('click', '.confirmPrompt', function() { 
         $("#symbolsearch").val('');
         var symbol = $(this).data('symbol'),
