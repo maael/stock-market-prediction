@@ -7,18 +7,32 @@ var cluster = require('cluster'),
     Company = require('../models/company'),
     Process = require('../models/process'),
     firstTimeSetUp = require('../firstTime/setup');
-
+/**
+ * The Artifical Neural Network Manager Process
+ * @module annManager
+ */
 (function() {
     var process = new Process({
             name: 'annManager',
             started: moment().toISOString()
         });
+    /**
+     * Runs first time set up
+     * @function firstTimeSetup
+     */
     firstTimeSetUp(run);
+    /**
+     * Uses moment to calculate time to the end of the day in milliseconds
+     * @returns {number}
+     */
     function timeUntilEndOfDay() {
         var now = moment(),
             endOfDay = moment().endOf('day');
         return endOfDay - now;
     }
+    /**
+     * The main function that the process performs at intervals
+     */
     function run() {
         var operationsDone = 0,
             operationsBeforeClose = 0;

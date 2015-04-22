@@ -1,3 +1,7 @@
+/**
+ * @file Manages the news sources for the application
+ * @author Matthew Elphick
+ */
 module.exports = [
 	{
 		name: 'The Guardian',

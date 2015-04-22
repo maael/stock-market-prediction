@@ -3,10 +3,18 @@ var frequency = require('word-frequency'),
     Word = require('../models/word'),
     Process = require('../models//process'),
     tokenizer = require('./tokenizer');
+/**
+ * The Lexical Analyser Process
+ * @module lexicalAnalyser
+ * @param {string} text - the text to analyse
+ * @param {function} lexicalCallback - the function to call when the analysis is complete
+ */
 var lexicalAnalyser = function (text, lexicalCallback) {
+    /** @private */
     var frequencies = frequency(text),
         words = [];
     // Prcess Setup
+    /** @private */
     var process = new Process({
         name: 'lexicalAnalyser',
         started: moment().toISOString()
