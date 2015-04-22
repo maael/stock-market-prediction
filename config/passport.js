@@ -5,7 +5,11 @@ var LocalStrategy = require('passport-local').Strategy,
 	LinkedInStrategy = require('passport-linkedin-oauth2').Strategy,
 	User = require('../app/models/user'),
 	configAuth = require('./auth');
-
+/**
+ * Sets up Passport Strategies (rules)
+ * @module passport
+ * @namespace
+ */
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
 		done(null, user.id);
