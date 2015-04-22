@@ -5,17 +5,26 @@ var User = require('./models/user'),
     ObjectId = require('mongoose').Types.ObjectId,
     moment = require('moment'),
     frequency = require('word-frequency');
+/**
+ * Returns an object of controller objects with functions
+ * @module controllers
+ * @returns {object}
+ */
 var controllers = (function() {
-  /*
-  * Index Controllers
-  */
+  /**
+   * Index Controllers
+   * @param {object} req - request object provided by Express
+   * @param {object} res - response object provided by Express
+   */
   function index(req, res) {
     res.render('index');
   }
 
-  /*
-  * Dashboard Controllers
-  */
+  /**
+   * Dashboard Controllers
+   * @param {object} req - request object provided by Express
+   * @param {object} res - response object provided by Express
+   */
   function dashboard(req, res) {
     var companies = [
       {
@@ -32,10 +41,16 @@ var controllers = (function() {
     });
   }
 
-  /*
-  * Companies Controllers
-  */
+  /**
+   * Companies Controllers
+   * @returns {object}
+   */
   function companies() {
+      /**
+       * Shows Companies page, with list of user followed companies
+       * @param {object} req - request object provided by Express
+       * @param {object} res - response object provided by Express
+       */
       function list(req, res) {
         Following.find({ 'user' : req.user.id }, function(err, following) {
           var followedCompanies = [];
@@ -51,6 +66,12 @@ var controllers = (function() {
           });
         });
       }
+      /**
+       * Used to get a single companies information for use by other pages
+       * @param {object} req - request object provided by Express
+       * @param {object} res - response object provided by Express
+       * @see fillCompany
+       */
       function get(req, res, next, symbol) {
         Company.findOne({ 'symbol' : symbol }, function(err, company) {
           if(err) { 
@@ -63,38 +84,38 @@ var controllers = (function() {
           }
         })
       }
+      /**
+       * Shows a single company's details page
+       * @param {object} req - request object provided by Express
+       * @param {object} res - response object provided by Express
+       */
       function view(req, res) {
         res.render('companies/detail', {
           user: req.user,
           company: req.company
         });
       }
-      function add(req, res) {
-        res.render('companies/remove');
-      }
       function remove(req, res) {
         res.render('companies/remove');
-      }
-      function addCompany(req, res) {
-
-      }
-      function removeCompany(req, res) {
-
       }
       return {
         list: list,
         get: get,
         view: view,
-        remove: remove,
-        addCompany: addCompany,
-        removeCompany: removeCompany
+        remove: remove
       };
     }
 
-  /*
-  * Unlinking Authentication Controllers
-  */
+  /**
+   * Unlinking Authentication Controllers
+   * @returns {object}
+   */
   function unlink() {
+    /**
+     * Local account unlinking
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function local(req, res) {
       var user = req.user;
       user.local.email = undefined;
@@ -103,6 +124,11 @@ var controllers = (function() {
         res.redirect('/user');
       });      
     }
+    /**
+     * Facebook account unlinking
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function facebook(req, res) {
       var user = req.user;
       user.facebook.token = undefined;
@@ -110,6 +136,11 @@ var controllers = (function() {
         res.redirect('/user');
       });  
     }
+    /**
+     * Twitter account unlinking
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function twitter(req, res) {
       var user = req.user;
       user.twitter.token = undefined;
@@ -117,6 +148,11 @@ var controllers = (function() {
         res.redirect('/user');
       });  
     }
+    /**
+     * Google account unlinking
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function google(req, res) {
       var user = req.user;
       user.google.token = undefined;
@@ -124,6 +160,11 @@ var controllers = (function() {
         res.redirect('/user');
       });  
     }
+    /**
+     * LinkedIn account unlinking
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function linkedin(req, res) {
       var user = req.user;
       user.linkedin.token = undefined;
@@ -140,25 +181,51 @@ var controllers = (function() {
     };
   };
 
-  /*
-  * User Controllers
-  */
+  /**
+   * User Controllers
+   * @returns {object}
+   */
   function user() {
+    /**
+     * Connect local account
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function connect(req, res) {
       res.render('user/connect-local');
     }
+    /**
+     * Show account page, with list of linked accounts
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function details(req, res) {
       res.render('user/details', {
         user: req.user
       });
     }
+    /**
+     * Show account login page
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function login(req, res) {
       res.render('user/login');
     }
+    /**
+     * Show account logout page
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function logout(req, res) {
       req.logout();
       res.redirect('/');
     }
+    /**
+     * Show account registration page
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function register(req, res) {      
       res.render('user/register');
     }
@@ -171,9 +238,10 @@ var controllers = (function() {
     };
   }
 
-  /*
-  * Feed Controllers
-  */
+  /**
+   * Feed Controllers
+   * @returns {object}
+   */
   function feed() {
     function list(req, res) {
       res.render('feed/list', {
@@ -189,36 +257,23 @@ var controllers = (function() {
     };
   }
 
-  /*
-  * News Controllers
-  */
+  /**
+   * News Controllers
+   * @returns {object}
+   */
   function news() {
+    /**
+     * Shows News page, listing recent news items
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function list(req, res) {
       res.render('news/list', {
         user: req.user
       });
     };
-    function view(req, res) {
-
-    };
     return {
-      list: list,
-      view: view
-    };
-  }
-  /*
-  * Market Controllers
-  */
-  function market() {
-    function list(req, res) {
-
-    };
-    function view(req, res) {
-
-    };
-    return {
-      list: list,
-      view: view
+      list: list
     };
   }
 
@@ -232,8 +287,7 @@ var controllers = (function() {
     unlink: unlink,
     user: user,
     feed: feed,
-    news: news,
-    market: market
+    news: news
   }
 })();
 
