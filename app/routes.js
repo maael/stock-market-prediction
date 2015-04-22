@@ -9,6 +9,7 @@ var controllers = require('./controllers'),
 module.exports = function(app, passport) {
     /*
      * General Authentication, redirects if unauthenticated
+     * @private
      * @param {object} req - request object provided by Express
      * @param {object} res - response object provided by Express
      * @param {function} next - next function provided by Express
@@ -20,6 +21,7 @@ module.exports = function(app, passport) {
 
     /*
      * API Authentication, drops if unauthenticated
+     * @private
      * @param {object} req - request object provided by Express
      * @param {object} res - response object provided by Express
      * @param {function} next - next function provided by Express
