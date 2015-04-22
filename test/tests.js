@@ -3,7 +3,9 @@ var chai = require('chai'),
     mongoose = require('mongoose'),
     dbConfig = require('../config/db'),
     request = require('request');
-
+/**
+ * Model Tests
+ */
 describe('models', function() {
     describe('company', function() {
 
@@ -33,7 +35,9 @@ describe('models', function() {
         
     });
 });
-
+/**
+ * Background Processes Tests
+ */
 describe('Background Processes', function() {
     var Process = require('../app/models/process'),
         Word = require('../app/models/word');
