@@ -8,8 +8,13 @@ var wordSchema = mongoose.Schema({
     count: Number,
     token: String
 });
-
-/* Frequency is per mille */
+/**
+ * Calculate word frequency per millie as a virtual property
+ * @function frequency
+ * @memberof module:models~wordSchema
+ * @this wordSchema
+ * @returns {number} frequency per millie
+ */
 wordSchema.virtual('frequency').get(function() {
     var numberOfWords = this.parent().numberOfWords;
     return ((this.count / numberOfWords) * 1000);
