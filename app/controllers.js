@@ -11,7 +11,7 @@ var User = require('./models/user'),
  * @namespace
  * @returns {object}
  */
-var controllers = (function() {
+module.exports = (function() {
   /**
    * Index Controllers
    * @param {object} req - request object provided by Express
@@ -296,5 +296,3 @@ var controllers = (function() {
     news: news
   }
 })();
-
-module.exports = controllers;
