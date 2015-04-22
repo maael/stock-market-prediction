@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-
+/**
+ * Mongo schema for NewsArticle model
+ * @class newsArticleSchema
+ */
 var newsArticleSchema = mongoose.Schema({
 	guid: { type: String, unique: true, index: true },
     title: String,
@@ -14,5 +17,7 @@ var newsArticleSchema = mongoose.Schema({
         feedType: String
     }
 }, {_id: false});
-
+/**
+ * @module NewsArticle
+ */
 module.exports = mongoose.model('NewsArticle', newsArticleSchema);

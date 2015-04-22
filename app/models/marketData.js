@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-
+/**
+ * Mongo schema for MarketData model
+ * @class marketDataSchema
+ */
 var marketDataSchema = mongoose.Schema({
     date: String,
     open: Number,
@@ -9,5 +12,7 @@ var marketDataSchema = mongoose.Schema({
     volume: Number,
     adjClose: Number
 });
-
+/**
+ * @module MarketData
+ */
 module.exports = mongoose.model('MarketData', marketDataSchema);

@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-
+/**
+ * Mongo schema for Feed model
+ * @class feedSchema
+ */
 var feedSchema = mongoose.Schema({
     title: String,
     description: String,
@@ -10,5 +13,7 @@ var feedSchema = mongoose.Schema({
         title: String
     }
 });
-
+/**
+ * @module Feed
+ */
 module.exports = mongoose.model('Feed', feedSchema);

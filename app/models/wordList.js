@@ -1,6 +1,9 @@
 var mongoose = require('mongoose'),
     Word = require('./word');
-
+/**
+ * Mongo schema for WordList model
+ * @class wordListSchema
+ */
 var wordListSchema = mongoose.Schema({
     numberOfWords: Number,
     words: [Word.schema]
@@ -16,5 +19,7 @@ wordListSchema.statics.stopList = function stopList(threshold, cb) {
     }
     return stopListArr;
 }
-
+/**
+ * @module WordList
+ */
 module.exports = mongoose.model('WordList', wordListSchema);

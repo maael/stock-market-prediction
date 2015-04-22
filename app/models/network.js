@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-
+/**
+ * Mongo schema for Network model
+ * @class networkSchema
+ */
 var networkSchema = mongoose.Schema({
     symbol: String,
     lastTrained: {type: Date, default: new Date},
@@ -25,5 +28,7 @@ var networkSchema = mongoose.Schema({
         }
     }
 });
-
+/**
+ * @module Network
+ */
 module.exports = mongoose.model('Network', networkSchema);

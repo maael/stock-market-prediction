@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
-
+/**
+ * Mongo schema for Process model
+ * @class processSchema
+ */
 var processSchema = mongoose.Schema({
     name: {type: String, unique: true},
     started: {type: Date, default: new Date},
@@ -11,5 +14,7 @@ var processSchema = mongoose.Schema({
 processSchema.statics.incrementRuns = function(processName, callback) {
     return this.update({name: processName}, [], { $inc: {runs: 1}}, callback);
 }
-
+/**
+ * @module Process
+ */
 module.exports = mongoose.model('Process', processSchema);
