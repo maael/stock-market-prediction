@@ -1,3 +1,8 @@
+/**
+ * Manages application authentication for social networks
+ * @module auth
+ * @author Matthew Elphick
+ */
 module.exports = {
 
     'facebookAuth' : {

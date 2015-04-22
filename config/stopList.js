@@ -1,3 +1,8 @@
+/**
+ * Manages the words in the static stop word list
+ * @module stopList
+ * @author Matthew Elphick
+ */
 module.exports = [
     'the',
     'of',
