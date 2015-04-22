@@ -8,15 +8,34 @@ var http = require('http'),
     Network = require('./models/network'),
     Process = require('./models/process'),
     request = require('request');
-
-
+/**
+ * API Controllers
+ * @module api
+ */
 var api = (function() {
-  /*
-  * User APIs
-  */
+  /**
+   * User APIs
+   * @returns {object}
+   */
   function user() {
+    /**
+     * User/Company APIs
+     * returns {object}
+     */
     function company() {
+      /**
+       * Adds a new company to the authenticated user, fetching information for it
+       * @param {object} req - request object provided by Express
+       * @param {object} res - response object provided by Express
+       */
       function put(req, res) {
+        /**
+         * Downloads the data for a symbol, calling the callback when it's received
+         * @param {string} host - host to make request to
+         * @param {string} path - path on host to request
+         * @param {string} symbol - symbol the request is for
+         * @param {function} cb - callback to call on completion
+         */
         var download = function(host, path, symbol, cb) {
           var options = {
               host: host,
@@ -94,6 +113,11 @@ var api = (function() {
               } else  {
                   //doesn't exist or error
               }
+              /**
+               * Fetch the latest quote for a company specified by its symbol
+               * @param {object} company - the company to fetch the most recent quote for
+               * @param {function} quoteCallback - function to call after the quote is received
+               */
               function getQuote(company, quoteCallback) {
                 var requestURL = 'http://dev.markitondemand.com/Api/v2/Quote/json?symbol=' + company.symbol.toString();
                 request(requestURL, function(error, response, body) {
@@ -142,10 +166,16 @@ var api = (function() {
       company: company
     };
   }
-  /*
-  * Company APIs
-  */
+  /**
+   * Company APIs
+   * returns {object}
+   */
   function company() {
+    /**
+     * Adds a company to the system with basic information, no market information added
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function put(req, res) {
       var company = new Company();
       company.name = req.body.name;
@@ -157,6 +187,11 @@ var api = (function() {
         res.json({message: 'success'});
       });
     }
+    /**
+     * Gets a company from the system by its symbol
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function get(req, res) {
       Company.find({ 'symbol' : req.query.symbol }, function(err, foundCompany) {
         if(err) { throw err; }
@@ -172,10 +207,16 @@ var api = (function() {
       put: put
     };
   };
-  /*
-  * News APIs
-  */
+  /**
+   * News APIs
+   * returns {object}
+   */
   function news() {
+    /**
+     * Gets the most recent news from the system, defaults to 25 most recent articles
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function get(req, res) {
       var limit = req.query.limit || 25,
           news = [],
@@ -224,7 +265,16 @@ var api = (function() {
     };
   };
 
+  /**
+   * Process API
+   * @returns {object}
+   */
   function process() {
+    /**
+     * Gets a processes' information
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function get(req, res) {
       Process.findOne({name: req.query.name}, function(err, process) {
         if(err) { 
