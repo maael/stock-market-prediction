@@ -8,6 +8,7 @@ var User = require('./models/user'),
 /**
  * Returns an object of controller objects with functions
  * @module controllers
+ * @namespace
  * @returns {object}
  */
 var controllers = (function() {
@@ -43,6 +44,7 @@ var controllers = (function() {
 
   /**
    * Companies Controllers
+   * @namespace
    * @returns {object}
    */
   function companies() {
@@ -108,6 +110,7 @@ var controllers = (function() {
 
   /**
    * Unlinking Authentication Controllers
+   * @namespace
    * @returns {object}
    */
   function unlink() {
@@ -183,6 +186,7 @@ var controllers = (function() {
 
   /**
    * User Controllers
+   * @namespace
    * @returns {object}
    */
   function user() {
@@ -240,6 +244,7 @@ var controllers = (function() {
 
   /**
    * Feed Controllers
+   * @namespace
    * @returns {object}
    */
   function feed() {
@@ -259,6 +264,7 @@ var controllers = (function() {
 
   /**
    * News Controllers
+   * @namespace
    * @returns {object}
    */
   function news() {
