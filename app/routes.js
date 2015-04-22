@@ -1,62 +1,118 @@
 var controllers = require('./controllers'),
     api = require('./api');
-
+/**
+ * Routing
+ * @module routes
+ * @see module:api
+ * @see module:controllers
+ */
 module.exports = function(app, passport) {
     /*
-    * Define check for authentication
-    */
+     * General Authentication, redirects if unauthenticated
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     * @param {function} next - next function provided by Express
+     */
     function isAuthed(req, res, next) {
         if(req.isAuthenticated()) { return next(); }
         res.redirect('/');
     }
+
+    /*
+     * API Authentication, drops if unauthenticated
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     * @param {function} next - next function provided by Express
+     */
     function isAuthedAPI(req, res, next) {
         if(req.isAuthenticated()) { return next(); }
     }
-    /* Parameters */
+    /**
+     * Fills the company variable in a request if the page includes a company
+     * @function fillCompany
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     * @param {function} next - next function provided by Express
+     * @param {string} symbol - symbol of company used by page
+     */
     app.param('company', function(req, res, next, symbol) {
         controllers.companies().get(req, res, next, symbol);
     });
-
-
-    /*
-    * Terry Pratchett Tribute
-    * “A man's not dead while his name is still spoken”
-    */
+    /**
+     * Tribute to Terry Pratchett - “A man's not dead while his name is still spoken”
+     * @function terryPratchettTribute
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     * @param {function} next - next function provided by Express
+     */
     app.get('/*',function(req,res,next){
         res.header('X-Clacks-Overhead' , 'GNU Terry Pratchett');
         next();
     });
-    /*
-    * Index Routing
-    */
+    /**
+     * Index Routing
+     * @function indexRouting
+     * @see module:controllers.index
+     */
     app.get('/', function(req, res){
         controllers.index(req, res);
     });
-    /*
-    * Dashboard Routing
-    */
+    /**
+     * Dashboard Routing
+     * @function dashboardRouting
+     * @see module:controllers.dashboard
+     */
     app.get('/dashboard', isAuthed, function(req, res) {
         controllers.dashboard(req, res);
     });
-    /*
-    * API Routing
-    */
+    /**
+     * API Routing Functions - Return JSON objects
+     * @see module:api
+     */
+    /**
+     * API - User/Company - Adds a company to the system, authenticated user automatically follows the company
+     * @function apiUserCompany
+     * @returns {object}
+     * @see module:api.user
+     */
     app.post('/api/user/company', isAuthedAPI, function(req, res) {
         api.user().company().put(req, res);
     });
+    /**
+     * API - Company - Returns information on a company as JSON
+     * @function apiCompany
+     * @returns {object}
+     * @see module:api.company
+     */
     app.get('/api/company', isAuthedAPI, function(req, res) {
         api.company().get(req, res);
     });
+    /**
+     * API - News - Returns recent news information as JSON
+     * @function apiNews
+     * @returns {object}
+     * @see module:api.news
+     */
     app.get('/api/news', isAuthedAPI, function(req, res) {
         api.news().get(req, res);
     });
+    /**
+     * API - Process - Returns information on a process as JSON
+     * @function apiProcess
+     * @returns {object}
+     * @see module:api.process
+     */
     app.get('/api/process', isAuthedAPI, function(req, res) {
         api.process().get(req, res);
     });
-    /*
-    * User Routing
-    */
-    /* Unlinking Routes */
+    /**
+     * User Routing
+     * @see module:controllers
+     */
+    /**
+     * Unlinking Routing
+     * @see module:controllers.unlink
+     */
     app.get('/unlink/local', function(req, res) {
         controllers.unlink().local(req, res);
     });
@@ -72,7 +128,10 @@ module.exports = function(app, passport) {
     app.get('/unlink/linkedin', function(req, res) {
         controllers.unlink().linkedin(req, res);
     });
-    /* Authorisation Routes */
+    /**
+     * Authorisation/Account Connecting Routing
+     * @see {@link http://passportjs.org/}
+     */
     app.get('/connect/local', function(req, res) {
         controllers.user().connect(req, res);
     });
@@ -105,7 +164,11 @@ module.exports = function(app, passport) {
         failureRedirect: '/login',
         failureFlash: true
     }));
-    /* Authentication Routes */
+    /**
+     * Authentication Routing
+     * @see {@link http://passportjs.org/}
+     * @see module:passport
+     */
     app.get('/login', function(req, res) {
         controllers.user().login(req, res);
     });
@@ -148,16 +211,10 @@ module.exports = function(app, passport) {
     app.get('/user', isAuthed, function(req, res) {
         controllers.user().details(req, res);
     });
-    app.get('/user/edit', isAuthed, function(req, res) {
-        controllers.user().edit(req, res);
-    });
-    app.put('/user/edit', isAuthed, function(req, res) {
-        controllers.user().update(req, res);
-    });
-    
-    /*
-    * Companies Routing
-    */
+    /**
+     * Authentication Routing
+     * @see module:controllers.companies
+     */
     app.get('/companies', isAuthed, function(req, res) {
         controllers.companies().list(req, res);
     });
@@ -174,9 +231,10 @@ module.exports = function(app, passport) {
         controllers.companies().remove(req, res);
     });
     
-    /*
-    * Feed Routing
-    */
+    /**
+     * Feed Routing
+     * @see module:controllers.feed
+     */
     app.get('/feed', isAuthed, function(req, res) {
         controllers.feed().list(req, res);
     });
@@ -184,13 +242,11 @@ module.exports = function(app, passport) {
         controllers.feed().view(req, res);
     });
     
-    /*
-    * News Routing
-    */
+    /**
+     * News Routing
+     * @see module:controllers.news
+     */
     app.get('/news', isAuthed, function(req, res) {
         controllers.news().list(req, res);
-    });
-    app.get('/news/:company', isAuthed, function(req, res) {
-        controllers.news().view(req, res);
     });
 };
