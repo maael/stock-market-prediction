@@ -1,7 +1,16 @@
 var ann = require('node-ann');
-// Returns an initialised network of the required configuration
+/**
+ * Returns an initialised network of the required configuration
+ * @module network/configuration
+ * @returns {object}
+ */
 module.exports = (function() {
 	return {
+		/**
+		 * Generates a new initialized network
+		 * @function generate
+		 * @returns initialized network
+		 */
 		generate: function() {
 			/*
 			* Create and configure network
