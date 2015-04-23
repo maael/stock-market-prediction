@@ -5,12 +5,51 @@ append content
         h4 #{company.symbol} | #{company.name}
             small #{company.market}
         h5 Current Information
-            div.currentInfo
+        table.currentInfo
+            thead
+                tr
+                    th Time
+                    th High
+                    th Low
+                    th Open
+                    th Last Price
+                    th Volume
+                    th Change
+            tbody
+                tr
+                    td#currentTime
+                    td#currentHigh
+                    td#currentLow
+                    td#currentOpen
+                    td#currentLast
+                    td#currentVolume
+                    td#currentChange
+        h5 Previous Information
+        table.previousInfo
+            thead
+                tr
+                    th Time
+                    th High
+                    th Low
+                    th Open
+                    th Last Price
+                    th Volume
+                    th Change
+            tbody
+                tr
+                    td#previousTime
+                    td#previousHigh
+                    td#previousLow
+                    td#previousOpen
+                    td#previousLast
+                    td#previousVolume
+                    td#previousChange
         h5 Market Information
             small Currently at #{company.quotes[company.quotes.length - 1].LastPrice}
         div#chart
         script(type='text/javascript', src='/vendor/d3/d3.min.js')
         script(type='text/javascript', src='/vendor/c3/c3.min.js')
+        script(type='text/javascript', src='/vendor/moment/moment.min.js') 
         script(type='text/javascript', src='/javascripts/api.js')
         script(type='text/javascript', src='/javascripts/companyDetail.js')
     else

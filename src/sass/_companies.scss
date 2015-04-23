@@ -101,3 +101,26 @@
         padding: 0.25em;
     }
 }
+
+/**
+ * Company Details Page Styles
+ */
+.graphLoaded > svg {
+    display: none;
+}
+.currentInfo, .previousInfo {
+    border-box: box-sizing;
+    text-align: center;
+    margin: 1em;  
+    width: 100%;
+    th, td {
+        padding: 0.25em;
+    }
+    th {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    td {
+        font-size: 1.25em;
+    }
+}

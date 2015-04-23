@@ -23,3 +23,29 @@ a {
 .pull-right {
     float: right;
 }
+
+.main-section {
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    h4 {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 0.25em;
+    }
+    h5 {
+        font-size: 1.25em;
+        font-weight: bold;
+        margin-bottom: 0.25em;
+    }
+    small {
+        font-size: 0.5em;
+    }
+    .centerContent {
+        left: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
