@@ -1,0 +1,83 @@
+.news {
+    #loading {
+        font-weight: bold;
+        height: 10em;
+        left: 50%;
+        margin-left: -5em;
+        margin-top: -10em;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 10em;
+        i {
+            animation: loading 3s linear infinite;
+            display: block;
+            font-size: 4em;
+            height: 2em;
+            left: 50%;
+            line-height: 2em;
+            margin-left: -1em;
+            margin-top: 0.1em;
+            position: absolute;
+            width: 2em;
+        }
+        @keyframes loading {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
+    .article {
+        background-color: $darkerGrey;
+        box-sizing: border-box;
+        display: table;
+        margin: 0.5em auto;
+        width: 100%;
+        &:nth-child(odd) {
+            background-color: $darkGrey;
+        }
+        & > * {
+            box-sizing: border-box;
+            display: table-cell;
+            padding: 0.5em;
+            vertical-align: middle;
+        }
+        .title {
+            font-weight: bold;
+            width: 25%;
+        }
+        .date {
+            background-color: $green;
+            color: $textOnGreen;
+            width: 17%;
+        }
+        .description {
+            clear: both;
+            width: 46%;
+            a {
+                color: $green;
+            }
+            br, img, .feedflare {
+                display: none;
+            }
+            .description-container {
+                max-height: 10vh;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+            }
+        }
+        .link {
+            text-align: right;
+            width: 12%;
+            &:hover {
+                background-color: $green;
+                color: $textOnGreen;
+            }
+        }
+    }
+}

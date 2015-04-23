@@ -1,0 +1,60 @@
+.main-section-with-sidebar {
+    box-sizing: border-box;
+    float: right;
+    min-height: 100%;
+    overflow: hidden;
+    padding: 2%;
+    width: 90%;
+}
+
+.main-menu {
+    background-color: $green;
+    color: $textOnGreen;
+    cursor: default;
+    float: left;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 10%;
+    & > .menu {
+        float: left;
+        height: 100%;
+        margin-top: 1.5em;
+        width: 100%;
+        & > div, & > a{
+            cursor: pointer;
+            display: block;
+            font-size: 4vh;
+            height: 2em;
+            padding: 0.5em 0;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            p {
+				@include breakpoint($mobileTablet) {
+					display: none;
+                }
+                font-size: 0.3em;
+                margin-top: 0.5em;
+				overflow: hidden;
+				text-overflow: ellipsis;
+            }
+        }
+        & > *:hover {
+            background-color: $darkGreen;
+        }
+        & > .selected {
+            background-color: $darkGreen;
+        }
+        .menu-option {
+            left: 50%;
+			overflow: hidden;
+            position: absolute;
+			text-overflow: ellipsis;
+            top: 50%;
+            transform: translate(-50%, -50%);
+			width: 100%;
+        }
+    }
+}

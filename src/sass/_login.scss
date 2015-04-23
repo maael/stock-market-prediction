@@ -1,0 +1,109 @@
+.loginArea {
+    margin: 1em auto;
+    overflow: hidden;
+    width: 50%;
+    h2 {
+        font-size: 2em;
+        font-weight: bold;
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin: 1em 0;
+        input {
+            border: 1px solid #CCCCCC;
+            display: block;
+            margin: 0.1em 0;
+            padding: 0.25em;
+            width: 100%;
+        }
+    }
+    button {
+        background-color: $green;
+        border: none;
+        border-radius: 0.3em;
+        color: $textOnGreen;
+        cursor: pointer;
+        display: block;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 1em auto 2em auto;
+        padding: 1em;
+    }
+    a {
+        color: $green;
+        margin-left: 0.5em;
+        text-decoration: none;
+    }
+    p {
+        line-height: 1.25em;
+    }
+    .leftSide {
+        float: left;
+        @include breakpoint($mobileTablet) {
+            clear: both;
+            float: none;
+            width: 100%;
+        }
+    }
+    .rightSide {
+        float: right;
+        text-align: center;
+        @include breakpoint($mobileTablet) {
+            clear: both;
+            float: none;
+            margin-top: 2em;
+            width: 100%;
+        }
+    }
+    .loginOptions {
+        margin: 1em auto;
+        width: 10em;
+    }
+}
+
+.colour-facebook {
+    color: $facebookBg;
+}
+
+.colour-twitter {
+    color: $twitterBg;
+}
+
+.colour-gplus {
+    color: $googleBg;
+}
+
+.colour-linkedin {
+    color: $linkedInBg;
+}
+
+.socialButton {
+    display: block;
+    line-height: 1.5em;
+    padding: 0.5em 0.75em;
+    margin: 0.5em;
+    text-align: center;
+    text-decoration: none;
+    width: 7em;
+    &.localButton {
+        background-color: $green;
+        color: #FFFFFF;
+    }
+    &.facebookButton {
+        background-color: $facebookBg;
+        color: #FFFFFF;
+    }
+    &.twitterButton {
+        background-color: $twitterBg;
+        color: #FFFFFF;
+    }
+    &.googleButton {
+        background-color: $googleBg;
+        color: #FFFFFF;
+    }
+    &.linkedInButton {
+        background-color: $linkedInBg;
+        color: #FFFFFF;
+    }
+}

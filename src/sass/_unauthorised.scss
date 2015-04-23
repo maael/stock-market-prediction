@@ -1,0 +1,35 @@
+.main-header {
+    background-color: $green;
+    color: $textOnGreen;
+    font-size: 7vh;
+    font-weight: bold;
+    text-align: center;
+    padding: 1em 0;
+    width: 100%;
+}
+
+.main-section {
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    h4 {
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-bottom: 0.25em;
+    }
+    h5 {
+        font-size: 1.25em;
+        font-weight: bold;
+        margin-bottom: 0.25em;
+    }
+    small {
+        font-size: 0.5em;
+    }
+    .centerContent {
+        left: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

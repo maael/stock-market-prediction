@@ -1,0 +1,103 @@
+/*
+* Companies Specific Styles
+*/
+
+.ui-autocomplete {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    margin: 2px 0 0 0;
+    list-style: none;
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    .ui-menu-item {
+        cursor: pointer;
+        display: block;
+        padding: 3px 15px;
+        clear: both;
+        font-weight: normal;
+        line-height: 18px;
+        color: #555555;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 0.5em;
+        &.ui-state-focus, &.ui-state-hover, &.ui-state-active {
+            color: #ffffff;
+            text-decoration: none;
+            background-color: $green;
+        }
+    }
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.addCompany {
+    background-color: #FFFFFF;
+    height: 4.5em;
+    position: relative;
+    #symbolsearch {
+        border: none;
+        box-sizing: border-box;
+        font-size: 1.5em;
+        left: 0;
+        line-height: 2em;
+        padding: 0.5em;
+        position: absolute;
+        top: 0;
+        text-overflow: ellipsis;
+        width: 70%;
+        &:focus {
+            outline: none;
+        }
+    }
+    .searchBullet {
+        background-color: $green;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        font-size: 1.5em;
+        line-height: 2em;
+        padding: 0.5em;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 0;
+        width: 30%;
+    }
+    .confirmPrompt {
+        cursor: pointer;
+    }
+    .hide {
+        display: none;
+    }
+}
+.companiesArea {
+    border-box: box-sizing;
+    margin: 1em;   
+    .companies {
+        width: 100%;
+        thead {
+            font-weight: bold;
+        }
+    }
+}
+.company {
+    &:hover {
+        background-color: $darkGrey;
+    }
+    td {
+        cursor: pointer;
+        padding: 0.25em;
+    }
+}

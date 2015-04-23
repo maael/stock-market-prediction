@@ -1,11 +1,11 @@
-/*
-* Fonts
-*/
+/**
+ * Fonts
+ */
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
 $font: Roboto, Arial, sans-serif;
-/*
-* Colours
-*/
+/**
+ * Colours
+ */
 $lightGrey: #F0F0F0;
 $midGrey: #DFDFDF;
 $darkGrey: #DDDDDD;
@@ -19,3 +19,13 @@ $facebookBg: #3B5998;
 $twitterBg: #55ACEE;
 $googleBg: #DD4B39;
 $linkedInBg: #007BB6;
+/**
+ * Breakpoints
+ */
+$loginBreak: 950px;
+$mobileTablet: '(max-width: 890px)';
+$mobile: '(max-width: 580px)';
+$tablet: '(min-width: 581px) and (max-width: 890px)';
+$notebook: '(min-width: 891px) and (max-width: 1120px)';
+$desktop: '(min-width: 1121px) and (max-width: 1400px)';
+$cinema: '(min-width: 1401px)';

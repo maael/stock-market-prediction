@@ -1,0 +1,105 @@
+.splash-header {
+
+    background-color: $green;
+    color: $textOnGreen;
+    font-weight: bold;
+    height: 20vh;
+    padding: 1em 0;
+    position: relative;
+    width: 100%;
+
+    @include breakpoint($mobileTablet) {
+        display: none;
+    }
+
+    .hex-row {
+        display: inline-block;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        .hex {
+            position: relative;
+            float: left;
+            width: 6vw;
+            height: 10vw;
+            z-index: 1vw;
+            margin-left: 5vw;
+            margin-right: 5vw;
+            background: $lightGreen;
+            transition: all 0.2s;
+            line-height: 10em;
+            text-align: center;
+            &:before{
+                content: " ";
+                position: absolute;
+                left: -2.95vw;
+                border-right: 3vw solid $lightGreen;
+                border-top: 5vw solid transparent;
+                border-bottom: 5vw solid transparent;
+                z-index: 100;
+                transition: all 0.2s;
+                top: 0;
+            }
+            &:after {
+                content: " ";
+                position: absolute;
+                right: -2.9vw;
+                border-left: 3vw solid $lightGreen;
+                border-top: 5vw solid transparent;
+                border-bottom: 5vw solid transparent;
+                z-index: 100;
+                transition: all 0.2s;
+                top: 0;
+            }
+            .hex-content {
+                font-size: 1vw;
+                line-height: 1.25vw;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 999;
+                i {
+                    font-size: 3vw;
+                }
+            }
+        }
+    }
+}
+
+.splash-content {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1em;
+    text-align: center;
+    width: 80%;
+    p {
+        margin: 1em auto;
+    }
+    .socialIcons {
+        padding: 1em;
+        i {
+            margin: 0.5em;
+        }
+    }
+    .loginRegisterZone {
+        margin: 0 auto;
+        text-align: center;
+        width: 20em;
+    }
+    .loginButton, .registerButton {
+        background-color: $green;
+        border: none;
+        border-radius: 0.3em;
+        color: $textOnGreen;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 1em 1em 2em 1em;
+        padding: 1em;
+        text-align: center;
+        text-decoration: none;
+        width: 6em;
+    }
+}
