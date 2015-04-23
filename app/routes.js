@@ -235,13 +235,13 @@ module.exports = function(app, passport) {
     
     /**
      * Feed Routing
-     * @see module:controllers.feed
+     * @see module:controllers.predictions
      */
-    app.get('/feed', isAuthed, function(req, res) {
-        controllers.feed().list(req, res);
+    app.get('/predictions', isAuthed, function(req, res) {
+        controllers.predictions().list(req, res);
     });
-    app.get('/feed/:activity', isAuthed, function(req, res) {
-        controllers.feed().view(req, res);
+    app.get('/predictions/:activity', isAuthed, function(req, res) {
+        controllers.predictions().view(req, res);
     });
     
     /**

@@ -243,18 +243,18 @@ module.exports = (function() {
   }
 
   /**
-   * Feed Controllers
+   * Predictions Controllers
    * @namespace
    * @returns {object}
    */
-  function feed() {
+  function predictions() {
     function list(req, res) {
-      res.render('feed/list', {
+      res.render('predictions/list', {
         user: req.user
       });
     };
     function view(req, res) {
-      res.render('feed/detail');
+      res.render('predictions/detail');
     };
     return {
       list: list,
@@ -292,7 +292,7 @@ module.exports = (function() {
     companies: companies,
     unlink: unlink,
     user: user,
-    feed: feed,
+    predictions: predictions,
     news: news
   }
 })();
