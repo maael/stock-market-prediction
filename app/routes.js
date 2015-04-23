@@ -223,9 +223,6 @@ module.exports = function(app, passport) {
     app.get('/companies/:company', isAuthed, function(req, res) {
         controllers.companies().view(req, res);
     });
-    app.put('/companies/:company/add', isAuthed, function(req, res) {
-        controllers.companies().add(req, res);
-    });
     app.get('/companies/:company/remove', isAuthed, function(req, res) {
         controllers.companies().remove(req, res);
     });

@@ -4,10 +4,11 @@ append content
     if company 
         h4 #{company.symbol} | #{company.name}
             small #{company.market}
+        h5 Current Information
+            div.currentInfo
         h5 Market Information
             small Currently at #{company.quotes[company.quotes.length - 1].LastPrice}
         div#chart
-        h5 News Information
         script(type='text/javascript', src='/vendor/d3/d3.min.js')
         script(type='text/javascript', src='/vendor/c3/c3.min.js')
         script(type='text/javascript', src='/javascripts/api.js')
