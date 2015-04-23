@@ -72,7 +72,7 @@ get(window.location.origin + '/api/news', function(response) {
 
         return errorDiv;
     }
-    if(!response.hasOwnProperty('error')) {
+    if(!news.hasOwnProperty('error')) {
         for(var i = 0; i < news.length; i++) {
             var article = news[i];
             if((typeof(loadingElement) !== 'undefined') && (i == 0)) {
@@ -90,7 +90,6 @@ get(window.location.origin + '/api/news', function(response) {
  */
 get(window.location.origin + '/api/process?name=newsWatcher', function(response) {
     var process = JSON.parse(response);
-    console.log(process)
     if(!process.hasOwnProperty('error')) {
         document.getElementById('newsLastUpdated').innerHTML = moment(process.lastRun).fromNow();
     } else {
