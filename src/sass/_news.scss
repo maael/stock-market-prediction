@@ -56,6 +56,10 @@
         }
         .description {
             clear: both;
+            @include breakpoint($mobileTablet) {
+                background-color: red;
+                display: none;
+            }
             width: 46%;
             a {
                 color: $green;
