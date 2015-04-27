@@ -3,10 +3,20 @@
 [![Dependencies Status](https://img.shields.io/david/maael/stock-market-prediction.svg)](https://david-dm.org/maael/stock-market-prediction)
 [![Code Climate](https://img.shields.io/codeclimate/github/maael/stock-market-prediction.svg)](https://codeclimate.com/github/maael/stock-market-prediction)
 
-Using -
-- node
-- cluster
-- express
-- jade
-- sass
-- gulp
+## Dependencies
+Requires ```Node.js > 0.10``` and ```mongo > 2.1.1``` to be installed.
+
+## Installation
+```bash
+		npm install
+```
+
+## Test Application
+```bash
+	mocha
+```
+
+## Start Application
+```bash 
+	npm start
+```
