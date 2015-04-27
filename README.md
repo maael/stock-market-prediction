@@ -4,11 +4,11 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/maael/stock-market-prediction.svg)](https://codeclimate.com/github/maael/stock-market-prediction)
 
 ## Dependencies
-Requires ```Node.js > 0.10``` and ```mongo > 2.1.1``` to be installed.
+Requires ```Node.js > 0.10```, ```npm 1.4.9``` and ```mongo > 2.1.1``` to be installed.
 
 ## Installation
 ```bash
-		npm install
+	npm install
 ```
 
 ## Test Application
