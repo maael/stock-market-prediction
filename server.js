@@ -11,14 +11,14 @@ var express = require('express'),
     morgan = require('morgan'),
     passport = require('passport'),
     pm2 = require('pm2');
-
+/**
+ * Configure and return application
+ */
 function getApp(dbURL) {
   /* Configure db */
   mongoose.connect(dbURL);
-
   /* Configure passport */
   require('./config/passport')(passport);
-
   /* Configure app */
   app.use(express.static(pub));
   app.use(morgan('dev'));
@@ -27,7 +27,6 @@ function getApp(dbURL) {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.set('views',__dirname + '/views');
   app.set('view engine','jade');
-
   app.use(session({ resave: false, saveUninitialized: false, secret: 'stockmarketprediction'}));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -36,13 +35,15 @@ function getApp(dbURL) {
     res.locals.message = req.flash();
     next();
   });
-
   /* Perform app routings */
   routes(app, passport);
-
+  /* Return configured app */
   return app;
 }
-
+/**
+ * Application and Details
+ * @module app
+ */
 module.exports = {
   getApp: getApp,
   port: port 
