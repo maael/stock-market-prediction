@@ -20,3 +20,6 @@ Requires ```Node.js > 0.10```, ```npm 1.4.9``` and ```mongo > 2.1.1``` to be ins
 ```bash 
 	npm start
 ```
+
+## Notes
+The social options will not work without generating your own keys for the respective social network options.
