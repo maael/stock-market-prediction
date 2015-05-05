@@ -248,11 +248,26 @@ module.exports = (function() {
    * @returns {object}
    */
   function predictions() {
+    /**
+     * Shows Predictions page, with list of user followed companies
+     * @param {object} req - request object provided by Express
+     * @param {object} res - response object provided by Express
+     */
     function list(req, res) {
-      res.render('predictions/list', {
-        user: req.user
+      Following.find({ 'user' : req.user.id }, function(err, following) {
+        var followedCompanies = [];
+        for(var i = 0; i < following.length; i++) {
+          followedCompanies.push(following[i].company);
+        }
+        Company.find({ '_id' : { $in: followedCompanies }}, function(err, companies) {
+          if(err) { throw err; }
+          res.render('predictions/list', {
+            user: req.user,
+            companies: companies
+          });
+        });
       });
-    };
+    }
     function view(req, res) {
       res.render('predictions/detail');
     };
