@@ -36,6 +36,9 @@
         display: table;
         margin: 0.5em auto;
         width: 100%;
+        &:first-of-type {
+            display: none;
+        }
         &:nth-child(odd) {
             background-color: $darkGrey;
         }
