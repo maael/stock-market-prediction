@@ -1,6 +1,6 @@
 extend ../fragments/_auth_header
 append content
-    p Predictions
+    h4 Predictions
     table.predictions
         thead
             tr
@@ -11,10 +11,10 @@ append content
                 th Prediction
                 th Time Predicted
         tbody
-            tr
-                td
-                td
-                td
-                td
-                td
-                td
+            for company in companies
+                tr(class='company')
+                    td
+                    td #{company.symbol}
+                    td #{company.name}
+                    td
+                    td
